@@ -62,26 +62,63 @@ basic_model = select(basic_model, -c(total_incidents, percentgocollege,percentno
 
 cor(basic_model, method = "pearson")
 
-#percentnogocollegelog1p and percentacadnotimptlog1p are highly correlated
+#percentnogocollegelog1p and percentacadnotimptlog1p are highly correlated, so one of them needs to be dropped. I will drop percentnogocollegelog1p.#
 
 basic_model = select(basic_model, -c(percentnogocollegelog1p))
 
 glimpse(basic_model)
 ```
 
-##Demographic Variables
+##Basic Model - Demographic Variables
 ```{r Demographic Variables}
 #setting up my dataset#
-demographic_control <- df[, c("C0568", "STRATA", "C0560", "C0562")]
 
-colnames(demographic_control) <- c("school_size", "demographics", "crime_live", "crime_area")
+#Nickerson and Martens (2008) reocde procedure - combine mixed into moderate, and combined school into middle school# 
+
+#This seems sensible to me too#
+
+demographic_control <- df[, c("FR_SIZE", "STRATA", "FR_URBAN", "C0560", "C0562")]
+
+colnames(demographic_control) <- c("school_size", "demographics", "urban", "crime_live", "crime_area")
 
 demographic_control <- na.omit(demographic_control) #making sure that no NA values remain#
+
+demographic_control$crime_live = ifelse(demographic_control$crime_live == 4, 2, demographic_control$crime_live)
+
+demographic_control$crime_live_recode = 4 - demographic_control$crime_live #reverse-recoding crimelive#
+
+table(demographic_control$crime_live) #checking recoding#
+table(demographic_control$crime_live_recode) #checking recoding#
+
+demographic_control$crime_area_recode = 4 - demographic_control$crime_area #reverse-recoding crimearea#
+
+table(demographic_control$crime_area) #checking recoding#
+table(demographic_control$crime_area_recode) #checking recoding#
+
+#School Size needs no recoding
+table(demographic_control$school_size)
+
+(demographic_control <- demographic_control %>%
+    mutate(school_type = case_when(
+      demographics <= 143 ~ "Elementary",
+      demographics >= 211 & demographics<=244 | demographics>=413 & demographics<=444 ~  "Middle_Combined",
+      demographics>=311 & demographics<=344 ~ "High"
+    )))
+
+table(demographic_control$school_type)
+
+#Rural or Urban (City, Suburb or Town)
+
+demographic_control$urban = ifelse(demographic_control$urban == 4, 0, 1)
+
+table(demographic_control$urban)
+
+demographic_control = select(demographic_control, -c(demographics, crime_live, crime_area))
 
 glimpse(demographic_control)
 ```
 
-##Security Variables
+##Security Variables - Factor Analysis
 ```{r Security Variables}
 #setting up my dataset#
 security <- df[, c("C0110", "C0112", "C0114", "C0116", "C0120", "C0121", "C0122", "C0125", "C0129", "C0134", "C0136", "C0138", "C0140", "C0139", "C0141", "C0143", "C0142", "C0144", "C0146", "C0150", "C0153")]
@@ -91,7 +128,7 @@ colnames(security) <- c("visitor_badge", "control_building", "control_ground", "
 security <- na.omit(security) #making sure that no NA values remain#
 ```
 
-##Parental Community Variables
+##Parental Community Variables - Factor Analysis
 ```{r Parental Community Variables}
 #setting up my dataset#
 parental_community <- df[, c("C0196", "C0198", "C0190", "C0192", "C0204", "C0206", "C0208", "C0210", "C0212", "C0214", "C0216", "C0218")]
@@ -101,7 +138,7 @@ colnames(parental_community) <- c("open_house", "parent_teacher_conf", "discipli
 parental_community <- na.omit(parental_community) #making sure that no NA values remain#
 ```
 
-##Student Education Variables
+##Student Education Variables - Factor Analysis
 ```{r Student Education Variables}
 #setting up my dataset#
 student_education <- df[, c("C0174", "C0183", "C0176", "C0181", "C0175", "C0177", "C0179", "C0186")]
@@ -134,21 +171,6 @@ glimpse(sub)
 
 
 ```
-
-
-
-
-
-checkzero_total_incidents <- sub$total_incidents == 0
-table(checkzero_total_incidents) #there are 274 schools with zero incidents, out of all 2762 schools#
-
-checkzero_percentlowgrades <- sub$percentlowgrades == 0
-table(checkzero_percentlowgrades)#there are 182 schools with 0% low grades, out of all 2762 schools#
-
-sub$percentnogocollege = 100 - sub$percentgocollege #reverse-recoding percentgocollege as percent no go college#
-
-describe(sub$percentgocollege) #checking recoding#
-describe(sub$percentnogocollege) #checking recoding#
 
 sub$r.crimeschool = 4 - sub$crimeschool #reverse-coding crimeschool variable#
 #now, higher level of r.crimeschool means higher level of crime#
@@ -229,7 +251,6 @@ stargazer(transform, covariate.labels = c("Total Incidents", "Percentage of Stud
 ```
 
 ```{r Save R Dataspace}
-#setting up my dataset#
 
 save.image(file = "my_work_space.RData")
 
