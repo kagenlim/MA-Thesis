@@ -1,0 +1,161 @@
+---
+title: "Regressions for Thesis"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Load Workspace}
+load("my_work_space.RData")
+```
+
+### Preliminary Models
+```{r Preliminary Models}
+lm1 = lm(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege, sub)
+
+lm2 = lm(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps, sub)
+
+anova(lm1, lm2)
+
+lm3 = lm(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone, sub)
+
+anova(lm2, lm3)
+
+lm4 = lm(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone + r.randommetal, sub)
+
+anova(lm3, lm4)
+
+lm5 = lm(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone + r.randommetal + r.strictdresscode, sub)
+
+anova(lm4, lm5)
+
+library(stargazer)
+stargazer(lm1, lm2, lm3, lm4, lm5, type = 'text', title = "Table 4: Initial Models", covariate.labels = c("Percentage of Students with Low Grades", "Percentage of Students Unlikely to Attend College", "Random Sweeps in School", "Prohibition of Non-Academic Phone Use", "Random Metal Detector Checks on Students", "Strict Dress Code for Students"))
+```
+
+### Final Models
+
+```{r Final Models - Assumptions and Controls}
+library(lmtest)
+bptest(lm5)
+
+library(rms)
+
+lm1.1 = ols(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone + r.randommetal + r.strictdresscode, data = sub, x = T, y = T)
+
+lm1.2 = robcov(lm1.1)
+
+stargazer(lm1.2, type = 'text', title = "Table 5: Initial Model 5 with Robust Standard Errors", covariate.labels = c("Percentage of Students with Low Grades", "Percentage of Students Unlikely to Attend College", "Random Sweeps in School", "Prohibition of Non-Academic Phone Use", "Random Metal Detector Checks on Students", "Strict Dress Code for Students"))
+
+controls <- sub[, c("respondentyears", "classroomchanges")]
+
+stargazer(controls, covariate.labels = c("Respondents' Years of Service", "Classroom Changes"))
+
+lm2.1 = ols(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone + r.randommetal + r.strictdresscode + r.crimeschool, data = sub, x = T, y = T)
+
+lm2.2 = robcov(lm2.1)
+
+lrtest(lm1.2, lm2.2)
+
+lm3.1 = ols(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone + r.randommetal + r.strictdresscode + r.crimeschool + log1p(respondentyears), data = sub, x = T, y = T)
+
+lm3.2 = robcov(lm3.1)
+
+lrtest(lm2.2, lm3.2)
+
+lm4.1 = ols(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone + r.randommetal + r.strictdresscode + r.crimeschool + classroomchanges, data = sub, x = T, y = T)
+
+lm4.2 = robcov(lm4.1)
+
+lrtest(lm2.2, lm4.2)
+
+library(stargazer)
+
+stargazer(lm1.2, lm2.2, lm3.2, lm4.2, type = 'text', title = "Table 9: OLS Regression, with Robust Standard Errors, with Control Variables", covariate.labels = c("Percentage of Students with Low Grades", "Percentage of Students Unlikely to Attend College", "Random Sweeps in School", "Prohibition of Non-Academic Phone Use", "Random Metal Detector Checks on Students", "Strict Dress Code for Students", "Crime around School", "Respondent's Years of Service", "Classroom Changes"))
+
+```
+
+### Not forgetting Interactions
+
+
+```{r Final Models - Interactions}
+lm4.1 = ols(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone + r.randommetal + r.strictdresscode + r.crimeschool + classroomchanges, data = sub, x = T, y = T)
+
+lm4.2 = robcov(lm4.1)
+
+lm4.2.1 = ols(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone + r.randommetal + r.strictdresscode + r.crimeschool + classroomchanges + log1p(percentlowgrades)*r.randomsweeps, data = sub, x = T, y = T)
+
+lm4.2.2 = robcov(lm4.2.1)
+
+lrtest(lm4.2, lm4.2.2)
+
+stargazer(lm4.2, lm4.2.2, type = 'text', title = "Table 10: OLS Regression, with Robust Standard Errors, with Control and Interaction Variables", covariate.labels = c("Percentage of Students with Low Grades", "Percentage of Students Unlikely to Attend College", "Random Sweeps in School", "Prohibition of Non-Academic Phone Use", "Random Metal Detector Checks on Students", "Strict Dress Code for Students", "Crime around School", "Classroom Changes", "log1p(percentlowgrades)*randomsweeps"))
+```
+
+
+
+#comment
+
+lm4.1 = ols(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone + r.randommetal + r.strictdresscode + r.crimeschool + classroomchanges, data = sub, x = T, y = T)
+
+lm4.2 = robcov(lm4.1)
+
+lm4.2.1 = ols(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone + r.randommetal + r.strictdresscode + r.crimeschool + classroomchanges + log1p(percentlowgrades)*r.randomsweeps, data = sub, x = T, y = T)
+
+lm4.2.2 = robcov(lm4.2.1)
+
+lrtest(lm4.2, lm4.2.2)
+
+lm4.3.1 = ols(log1p(total_incidents) ~ log1p(percentlowgrades) + percentnogocollege + r.randomsweeps + r.prohibit_phone + r.randommetal + r.strictdresscode + r.crimeschool + classroomchanges + log1p(percentlowgrades)*r.randomsweeps + percentnogocollege*r.strictdresscode, data = sub, x = T, y = T)
+
+lm4.3.2 = robcov(lm4.3.1)
+
+lrtest(lm4.2.2, lm4.3.2)
+
+stargazer(lm4.2, lm4.2.2, lm4.3.2, type = 'text', title = "Table 10: OLS Regression, with Robust Standard Errors, with Control and Interaction Variables", covariate.labels = c("Percentage of Students with Low Grades", "Percentage of Students Unlikely to Attend College", "Random Sweeps in School", "Prohibition of Non-Academic Phone Use", "Random Metal Detector Checks on Students", "Strict Dress Code for Students", "Crime around School", "Classroom Changes", "log1p(percentlowgrades)*randomsweeps", "percentnogocollege*dresscode"))
+```
+
+
+### Preliminary Visualizations
+
+library(ggplot2)
+library(ggpubr)
+
+x <- ggplot(sub, aes(percentlowgrades))+ geom_histogram() + labs(x="lowgrades", y = "count")
+
+y <- ggplot(sub, aes(percentnogocollege)) + geom_histogram() + labs(x="nogocollege",  y = "count")
+
+z <- ggplot(sub, aes(r.randomsweeps)) + geom_bar() + labs(x="randomsweep", y = "count")
+
+p <- ggplot(sub, aes(r.prohibit_phone)) + geom_bar() + labs(x="prohibitphone", y = "count")
+
+cr <- ggplot(sub, aes(r.crimeschool)) + geom_bar() + labs(x="crimearea", y = "count")
+
+Y <- ggplot(sub, aes(total_incidents))+geom_histogram()+labs(x="totalincident", y = "count")
+
+Y2 <- ggplot(sub, aes(log1p(total_incidents))) + geom_histogram()+labs(x="Log1p of totalincident", y = "count")
+
+x2 <- ggplot(sub, aes(log1p(percentlowgrades)))+ geom_histogram()+labs(x="Log1p of lowgrades", y = "count")
+
+a <- ggplot(sub, aes(log1p(percentlowgrades), log1p(total_incidents)))+geom_point()+labs(x="Log1p of lowgrades", y = "Log1p of total_incidents")
+
+b <- ggplot(sub, aes(percentnogocollege, log1p(total_incidents))) + geom_point() + labs(x="percentnogocollege", y = "Log1p of total_incidents")
+
+c <- ggplot(sub, aes(x = r.randomsweeps, y= log1p(total_incidents))) + geom_col() + labs(x="randomsweeps", y = "Log1p of total_incidents")
+
+d <- ggplot(sub, aes(x = r.prohibit_phone, y= log1p(total_incidents))) + geom_col() + labs(x="prohibitphone", y = "Log1p of total_incidents")
+
+e <- ggplot(sub, aes(x = r.crimeschool, y= log1p(total_incidents))) + geom_point()  + labs(x="crimearea", y = "Log1p of total_incidents")
+
+ggarrange(x, y, Y, ncol = 2, nrow = 2)
+
+ggarrange(z, p, cr, ncol = 2, nrow = 2)
+
+ggarrange(x2, Y2, ncol = 2, nrow = 1)
+
+ggarrange(c, d, e, ncol = 2, nrow = 2)
+
+ggarrange(a, b, ncol = 2, nrow = 1)
+
+

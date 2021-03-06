@@ -1,0 +1,155 @@
+---
+title: "Preprocessing for Thesis"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Loading Data In}
+#setting up my dataset#
+library(haven)
+library(psych)
+library(tibble)
+
+df <- read_sav("pu_ssocs18.sav") #2017-2018 School Survey on Crime and Safety Dataset; find the hyperlink above#
+
+#update#
+sub <- df[, c("INCID18", "C0532", "C0534", "C0562", "C0016_R", "C0538", "C0125", "C0153", "C0120", "C0136", "C0139")]
+
+colnames(sub) <- c("total_incidents", "percentlowgrades", "percentgocollege", "crimeschool", "respondentyears", "classroomchanges", "randomsweeps", "prohibit_phone", "randommetal", "strictdresscode", "panicbutton") #adding variable names#
+```
+
+```{r Socio-Economic Variables}
+#setting up my dataset#
+
+```
+
+```{r Security Variables}
+#setting up my dataset#
+
+```
+
+```{r Community Variables}
+#setting up my dataset#
+
+```
+
+```{r Parental Variables}
+#setting up my dataset#
+
+```
+
+```{r Control Variables}
+#setting up my dataset#
+
+```
+
+```{r Control Variables}
+#setting up my dataset#
+
+```
+
+
+
+
+
+
+sub <- na.omit(sub) #just to be sure there are no NA values left#
+
+checkzero_total_incidents <- sub$total_incidents == 0
+table(checkzero_total_incidents) #there are 274 schools with zero incidents, out of all 2762 schools#
+
+checkzero_percentlowgrades <- sub$percentlowgrades == 0
+table(checkzero_percentlowgrades)#there are 182 schools with 0% low grades, out of all 2762 schools#
+
+sub$percentnogocollege = 100 - sub$percentgocollege #reverse-recoding percentgocollege as percent no go college#
+
+describe(sub$percentgocollege) #checking recoding#
+describe(sub$percentnogocollege) #checking recoding#
+
+sub$r.crimeschool = 4 - sub$crimeschool #reverse-coding crimeschool variable#
+#now, higher level of r.crimeschool means higher level of crime#
+
+table(sub$crimeschool) #checking recoding#
+table(sub$r.crimeschool) #checking recoding#
+
+
+sub$r.randomsweeps = 3 - sub$randomsweeps #reverse-coding randomsweeps variable#
+
+sub$r.randomsweeps = ifelse(sub$r.randomsweeps == 2, 1, 0)
+
+table(sub$randomsweeps) #checking recoding#
+table(sub$r.randomsweeps) #checking recoding#
+
+sub$r.prohibit_phone = 3 - sub$prohibit_phone #reverse-coding prohibit_phone variable#
+
+sub$r.prohibit_phone = ifelse(sub$r.prohibit_phone == 2, 1, 0)
+
+table(sub$prohibit_phone) #checking recoding#
+table(sub$r.prohibit_phone) #checking recoding#
+
+sub$r.randommetal = 3 - sub$randommetal #reverse-coding random_metal variable#
+
+sub$r.randommetal = ifelse(sub$r.randommetal == 2, 1, 0)
+
+table(sub$randommetal) #checking recoding#
+table(sub$r.randommetal) #checking recoding#
+
+sub$r.strictdresscode = 3 - sub$strictdresscode #reverse-coding strictdresscode variable#
+
+sub$r.strictdresscode = ifelse(sub$r.strictdresscode == 2, 1, 0)
+
+table(sub$strictdresscode) #checking recoding#
+table(sub$r.strictdresscode) #checking recoding#
+
+sub$r.panicbutton = 3 - sub$panicbutton #reverse-coding strictdresscode variable#
+table(sub$panicbutton) #checking recoding#
+table(sub$r.panicbutton) #checking recoding#
+
+describe(sub$respondentyears)
+sub$respondentyears[sub$respondentyears < 0] <- NA
+describe(sub$respondentyears)
+sd(sub$respondentyears, na.rm=TRUE)
+
+describe(log1p(sub$respondentyears))
+sd(log1p(sub$respondentyears), na.rm=TRUE)
+
+describe(sub$classroomchanges)
+sd(sub$classroomchanges)
+```
+ 
+```{r Descriptive Statistics}
+
+descriptives <- sub[, c("total_incidents", "percentlowgrades", "percentgocollege")]
+
+tocount <- sub[, c("r.randomsweeps", "r.prohibit_phone", "r.randommetal", "r.strictdresscode")]
+
+tocount <- data.frame(tocount)
+
+apply(tocount[-1], 2, table)
+
+descriptives <- data.frame(descriptives)
+
+library(stargazer)
+
+stargazer(descriptives, covariate.labels = c("Total Incidents", "Percentage of Students with Low Grades", "Percentage of Students Unlikely to Attend College", "Random Sweeps in School", "Prohibition of Non-Academic Phone Use", "Random Metal Detector Checks on Students", "Strict Dress Code for Students"))
+
+sub$t.total_incidents <- log1p(sub$total_incidents)
+
+sub$t.percentlowgrades <- log1p(sub$percentlowgrades)
+
+transform <- sub[, c("t.total_incidents", "t.percentlowgrades")]
+
+transform <- data.frame(transform)
+
+stargazer(transform, covariate.labels = c("Total Incidents", "Percentage of Students with Low Grades"))
+```
+
+```{r Save R Dataspace}
+#setting up my dataset#
+
+save.image(file = "my_work_space.RData")
+
+```
+
