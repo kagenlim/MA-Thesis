@@ -1,5 +1,6 @@
 ---
-title: "Preprocessing for Thesis"
+title: "Preprocessing for MA Thesis"
+author: Kagen Lim
 output: html_document
 ---
 ```{r setup, include=FALSE}
@@ -11,69 +12,132 @@ knitr::opts_chunk$set(echo = TRUE)
 library(haven)
 library(psych)
 library(tibble)
+library(dplyr)
 
 df <- read_sav("pu_ssocs18.sav") #2017-2018 School Survey on Crime and Safety Dataset; find the hyperlink above#
+```
 
+##Basic Model
+```{r Basic Model}
 #update#
 basic_model <- df[, c("INCID18", "C0532", "C0534", "C0536")]
 
 colnames(basic_model) <- c("total_incidents", "percentlowgrades", "percentgocollege", "percentacadimpt")
 
+basic_model <- na.omit(basic_model) #making sure that no NA values remain#
+
+checkzero_total_incidents <- basic_model$total_incidents == 0
+table(checkzero_total_incidents) #there are 274 schools with zero incidents, out of all 2762 schools#
+
+checkzero_percentlowgrades <- basic_model$percentlowgrades == 0
+table(checkzero_percentlowgrades)#there are 128 schools with 0% low grades, out of all 2762 schools#
+
+checkzero_percentgocollege <- basic_model$percentgocollege== 0
+table(checkzero_percentgocollege)
+
+checkzero_percentacadimpt <- basic_model$percentacadimpt== 0
+table(checkzero_percentgocollege)
+
+#These are all non-zero numbers, so log1p transformation will be necessary#
+
+basic_model$percentnogocollege = 100 - basic_model$percentgocollege #reverse-recoding percentgocollege as percent no go college#
+
+describe(basic_model$percentgocollege) #checking recoding#
+describe(basic_model$percentnogocollege) #checking recoding#
+
+basic_model$percentacadnotimpt = 100 - basic_model$percentacadimpt #reverse-recoding percent acadnotimpt as percentacadimpt#
+
+describe(basic_model$percentacadimpt) #checking recoding#
+describe(basic_model$percentacadnotimpt) #checking recoding#
+
+basic_model$total_incidentslog1p = log1p(basic_model$total_incidents)
+
+basic_model$percentlowgradeslog1p = log1p(basic_model$percentlowgrades)
+
+basic_model$percentnogocollegelog1p = log1p(basic_model$percentnogocollege)
+
+basic_model$percentacadnotimptlog1p = log1p(basic_model$percentacadnotimpt)
+
+basic_model = select(basic_model, -c(total_incidents, percentgocollege,percentnogocollege, percentacadimpt, percentacadnotimpt, percentlowgrades))
+
+cor(basic_model, method = "pearson")
+
+#percentnogocollegelog1p and percentacadnotimptlog1p are highly correlated
+
+basic_model = select(basic_model, -c(percentnogocollegelog1p))
+
+glimpse(basic_model)
+```
+
+##Demographic Variables
+```{r Demographic Variables}
+#setting up my dataset#
 demographic_control <- df[, c("C0568", "STRATA", "C0560", "C0562")]
 
 colnames(demographic_control) <- c("school_size", "demographics", "crime_live", "crime_area")
 
+demographic_control <- na.omit(demographic_control) #making sure that no NA values remain#
+
+glimpse(demographic_control)
+```
+
+##Security Variables
+```{r Security Variables}
+#setting up my dataset#
 security <- df[, c("C0110", "C0112", "C0114", "C0116", "C0120", "C0121", "C0122", "C0125", "C0129", "C0134", "C0136", "C0138", "C0140", "C0139", "C0141", "C0143", "C0142", "C0144", "C0146", "C0150", "C0153")]
 
 colnames(security) <- c("visitor_badge", "control_building", "control_ground", "require_check", "random_check", "lock_inside", "close_lunch", "random_sweep", "drug_testing", "wear_uniform", "dress_code", "school_lockers", "book_bags", "panic_button", "emergency_notif", "anonymous_report", "student_id", "staff_id", "security_camera", "radio", "prohibit_phone")
 
-parental <- df[, c("")]
-
-community <- 
-  
-educational_approaches <- 
-
-
-                   
-"crimeschool", "respondentyears", "classroomchanges", "randomsweeps", "prohibit_phone", "randommetal", "strictdresscode", "panicbutton") #adding variable names#
+security <- na.omit(security) #making sure that no NA values remain#
 ```
 
-```{r Socio-Economic Variables}
+##Parental Community Variables
+```{r Parental Community Variables}
 #setting up my dataset#
+parental_community <- df[, c("C0196", "C0198", "C0190", "C0192", "C0204", "C0206", "C0208", "C0210", "C0212", "C0214", "C0216", "C0218")]
 
+colnames(parental_community) <- c("open_house", "parent_teacher_conf", "disciplinary_process", "parent_training_assist", "parenthelp_drug", "socialshelp_drug", "juvhelp_drug", "lawhelp_drug", "mhhelp_drug", "civichelp_drug", "privatehelp_drug", "relighelp_drug")
+
+parental_community <- na.omit(parental_community) #making sure that no NA values remain#
 ```
 
-```{r Security Variables}
+##Student Education Variables
+```{r Student Education Variables}
 #setting up my dataset#
+student_education <- df[, c("C0174", "C0183", "C0176", "C0181", "C0175", "C0177", "C0179", "C0186")]
+
+colnames(student_education) <- c("prevention_curriculum", "sel", "behav_mod", "mentoring", "peer_mediation", "student_court", "restorative_circles", "promote_community")
+
+student_education <- na.omit(student_education) #making sure that no NA values remain#
+```
+
+##Loading into One Data.Frame 
+```{r cbind Dataset}
+sub1 <- cbind(basic_model, demographic_control)
+
+sub2 <- cbind(sub1, security)
+
+sub3 <- cbind(sub2, parental_community)
+
+sub <- cbind(sub3, student_education)
+
+glimpse(sub)
+```
+
+##Feature Engineering: Interaction Terms
+
+```{r Interaction Variables}
+```
+
+##Save Output of Preprocessing
+```{r Interaction Variables}
+
 
 ```
 
-```{r Community Variables}
-#setting up my dataset#
-
-```
-
-```{r Parental Variables}
-#setting up my dataset#
-
-```
-
-```{r Control Variables}
-#setting up my dataset#
-
-```
-
-```{r Control Variables}
-#setting up my dataset#
-
-```
 
 
 
-
-
-
-sub <- na.omit(sub) #just to be sure there are no NA values left#
 
 checkzero_total_incidents <- sub$total_incidents == 0
 table(checkzero_total_incidents) #there are 274 schools with zero incidents, out of all 2762 schools#
