@@ -15,9 +15,27 @@ library(tibble)
 df <- read_sav("pu_ssocs18.sav") #2017-2018 School Survey on Crime and Safety Dataset; find the hyperlink above#
 
 #update#
-sub <- df[, c("INCID18", "C0532", "C0534", "C0562", "C0016_R", "C0538", "C0125", "C0153", "C0120", "C0136", "C0139")]
+basic_model <- df[, c("INCID18", "C0532", "C0534", "C0536")]
 
-colnames(sub) <- c("total_incidents", "percentlowgrades", "percentgocollege", "crimeschool", "respondentyears", "classroomchanges", "randomsweeps", "prohibit_phone", "randommetal", "strictdresscode", "panicbutton") #adding variable names#
+colnames(basic_model) <- c("total_incidents", "percentlowgrades", "percentgocollege", "percentacadimpt")
+
+demographic_control <- df[, c("C0568", "STRATA", "C0560", "C0562")]
+
+colnames(demographic_control) <- c("school_size", "demographics", "crime_live", "crime_area")
+
+security <- df[, c("C0110", "C0112", "C0114", "C0116", "C0120", "C0121", "C0122", "C0125", "C0129", "C0134", "C0136", "C0138", "C0140", "C0139", "C0141", "C0143", "C0142", "C0144", "C0146", "C0150", "C0153")]
+
+colnames(security) <- c("visitor_badge", "control_building", "control_ground", "require_check", "random_check", "lock_inside", "close_lunch", "random_sweep", "drug_testing", "wear_uniform", "dress_code", "school_lockers", "book_bags", "panic_button", "emergency_notif", "anonymous_report", "student_id", "staff_id", "security_camera", "radio", "prohibit_phone")
+
+parental <- df[, c("")]
+
+community <- 
+  
+educational_approaches <- 
+
+
+                   
+"crimeschool", "respondentyears", "classroomchanges", "randomsweeps", "prohibit_phone", "randommetal", "strictdresscode", "panicbutton") #adding variable names#
 ```
 
 ```{r Socio-Economic Variables}
