@@ -132,19 +132,19 @@ for (vars in colnames(security)){
   security[[vars]] = as.numeric(result)
 }
 
-student_factors_sec <- security[, c("visitor_badge", "require_check", "random_check", "random_sweep", "drug_testing", "wear_uniform", "dress_code", "book_bags", "student_id", "prohibit_phone")]
+student_factors_sec <- security[, c("visitor_badge", "require_check", "random_check", "random_sweep", "drug_testing", "wear_uniform", "dress_code", "book_bags", "student_id", "prohibit_phone", "emergency_notif", "anonymous_report", "radio", "staff_id")]
 
-management_factors_sec <- security[, c("control_building", "control_ground", "lock_inside", "close_lunch", "school_lockers", "panic_button", "emergency_notif", "anonymous_report", "security_camera", "radio", "staff_id")]
+management_factors_sec <- security[, c("control_building", "control_ground", "lock_inside", "close_lunch", "school_lockers", "panic_button", "security_camera")]
 
 fa.parallel(student_factors_sec, cor='tet', fa = 'fa')
 
-student_factors_sec_fa = fa(student_factors_sec, nfactors =3, cor='tet')
+student_factors_sec_fa = fa(student_factors_sec, nfactors =6, cor='tet')
 
 print(student_factors_sec_fa$loadings, cutoff = 0.3)
 
 fa.parallel(management_factors_sec, cor='tet', fa = 'fa')
 
-management_factors_sec_fa = fa(management_factors_sec, nfactors =4,cor='tet')
+management_factors_sec_fa = fa(management_factors_sec, nfactors =3,cor='tet')
 
 print(management_factors_sec_fa$loadings, cutoff = 0.3)
 
@@ -157,15 +157,20 @@ parental_community <- df[, c("C0196", "C0198", "C0190", "C0192", "C0204", "C0206
 
 colnames(parental_community) <- c("open_house", "parent_teacher_conf", "disciplinary_process", "parent_training_assist", "parenthelp_drug", "socialshelp_drug", "juvhelp_drug", "lawhelp_drug", "mhhelp_drug", "civichelp_drug", "privatehelp_drug", "relighelp_drug")
 
+for (vars in colnames(parental_community[3:12])){
+  result = ifelse(parental_community[[vars]] == 2, 0, 1)
+  parental_community[[vars]] = as.numeric(result)
+}
+
 parental_community <- na.omit(parental_community) #making sure that no NA values remain#
 
 glimpse(parental_community)
 
-parental <- parental_community[1:5]
+parental <- parental_community[3:5]
 
-fa.parallel(parental, cor='mixed', fa = 'fa') 
+fa.parallel(parental, cor='tet', fa = 'fa') 
 
-factor_parents = fa(parental, nfactors =2, rotate = "oblimin", cor = 'mixed')
+factor_parents = fa(parental, nfactors =1, cor = 'tet')
 
 print(factor_parents$loadings, cutoff = 0.4)
 
@@ -173,7 +178,7 @@ community <- parental_community[6:12]
 
 fa.parallel(community, cor='tet', fa = 'fa')
 
-factor_community = fa(community, nfactors =2, rotate = "oblimin", cor='tet')
+factor_community = fa(community, nfactors =3, cor='tet')
 
 print(factor_community$loadings, cutoff = 0.4)
 ```
@@ -185,6 +190,11 @@ student_education <- df[, c("C0174", "C0183", "C0176", "C0181", "C0175", "C0177"
 
 colnames(student_education) <- c("prevention_curriculum", "sel", "behav_mod", "mentoring", "peer_mediation", "student_court", "restorative_circles", "promote_community")
 
+for (vars in colnames(student_education)){
+  result = ifelse(student_education[[vars]] == 2, 0, 1)
+  student_education[[vars]] = as.numeric(result)
+}
+
 student_education <- na.omit(student_education) #making sure that no NA values remain#
 
 fa.parallel(student_education, cor='tet',fa = 'fa')
@@ -194,6 +204,39 @@ factor_student_ed = fa(student_education, nfactors =4, rotate = 'oblimin', cor='
 print(factor_student_ed$loadings, cutoff = 0.4)
 
 print(factor_student_ed)
+```
+
+##FactoMineR Attempt
+```{r cbind Dataset}
+sub_sec_comm <- cbind(security, parental_community)
+
+sub_sec_comm_ed <- cbind(sub_sec_comm, student_education)
+
+for (vars in colnames(sub_sec_comm_ed[1:21])){
+  sub_sec_comm_ed[[vars]] = as.factor(result)
+}
+
+for (vars in colnames(sub_sec_comm_ed[24:41])){
+  sub_sec_comm_ed[[vars]] = as.factor(result)
+}
+
+glimpse(sub_sec_comm_ed)
+
+library(FactoMineR)
+
+res.mfa <- MFA(sub_sec_comm_ed, 
+    group = c(21, 2, 3, 7, 8),
+    type = c("n", "c", "n", "n", "n"),
+    name.group = c("security", "parental_ord", "parental_cat", "community", "studented"),
+    graph = F)
+
+print(res.mfa)
+
+library(factoextra)
+ind <- get_mfa(res.mfa, "quali.var")
+
+print(ind$coord)
+
 ```
 
 ##Loading into One Data.Frame 
@@ -209,66 +252,11 @@ sub <- cbind(sub3, student_education)
 glimpse(sub)
 ```
 
-##Feature Engineering: Interaction Terms
-
-```{r Interaction Variables}
-```
 
 ##Save Output of Preprocessing
-```{r Interaction Variables}
+```{r Output}
 
 
-```
-
-sub$r.crimeschool = 4 - sub$crimeschool #reverse-coding crimeschool variable#
-#now, higher level of r.crimeschool means higher level of crime#
-
-table(sub$crimeschool) #checking recoding#
-table(sub$r.crimeschool) #checking recoding#
-
-
-sub$r.randomsweeps = 3 - sub$randomsweeps #reverse-coding randomsweeps variable#
-
-sub$r.randomsweeps = ifelse(sub$r.randomsweeps == 2, 1, 0)
-
-table(sub$randomsweeps) #checking recoding#
-table(sub$r.randomsweeps) #checking recoding#
-
-sub$r.prohibit_phone = 3 - sub$prohibit_phone #reverse-coding prohibit_phone variable#
-
-sub$r.prohibit_phone = ifelse(sub$r.prohibit_phone == 2, 1, 0)
-
-table(sub$prohibit_phone) #checking recoding#
-table(sub$r.prohibit_phone) #checking recoding#
-
-sub$r.randommetal = 3 - sub$randommetal #reverse-coding random_metal variable#
-
-sub$r.randommetal = ifelse(sub$r.randommetal == 2, 1, 0)
-
-table(sub$randommetal) #checking recoding#
-table(sub$r.randommetal) #checking recoding#
-
-sub$r.strictdresscode = 3 - sub$strictdresscode #reverse-coding strictdresscode variable#
-
-sub$r.strictdresscode = ifelse(sub$r.strictdresscode == 2, 1, 0)
-
-table(sub$strictdresscode) #checking recoding#
-table(sub$r.strictdresscode) #checking recoding#
-
-sub$r.panicbutton = 3 - sub$panicbutton #reverse-coding strictdresscode variable#
-table(sub$panicbutton) #checking recoding#
-table(sub$r.panicbutton) #checking recoding#
-
-describe(sub$respondentyears)
-sub$respondentyears[sub$respondentyears < 0] <- NA
-describe(sub$respondentyears)
-sd(sub$respondentyears, na.rm=TRUE)
-
-describe(log1p(sub$respondentyears))
-sd(log1p(sub$respondentyears), na.rm=TRUE)
-
-describe(sub$classroomchanges)
-sd(sub$classroomchanges)
 ```
  
 ```{r Descriptive Statistics}
