@@ -126,6 +126,28 @@ security <- df[, c("C0110", "C0112", "C0114", "C0116", "C0120", "C0121", "C0122"
 colnames(security) <- c("visitor_badge", "control_building", "control_ground", "require_check", "random_check", "lock_inside", "close_lunch", "random_sweep", "drug_testing", "wear_uniform", "dress_code", "school_lockers", "book_bags", "panic_button", "emergency_notif", "anonymous_report", "student_id", "staff_id", "security_camera", "radio", "prohibit_phone")
 
 security <- na.omit(security) #making sure that no NA values remain#
+
+for (vars in colnames(security)){
+  result = ifelse(security[[vars]] == 2, 0, 1)
+  security[[vars]] = as.numeric(result)
+}
+
+student_factors_sec <- security[, c("visitor_badge", "require_check", "random_check", "random_sweep", "drug_testing", "wear_uniform", "dress_code", "book_bags", "student_id", "prohibit_phone")]
+
+management_factors_sec <- security[, c("control_building", "control_ground", "lock_inside", "close_lunch", "school_lockers", "panic_button", "emergency_notif", "anonymous_report", "security_camera", "radio", "staff_id")]
+
+fa.parallel(student_factors_sec, cor='tet', fa = 'fa')
+
+student_factors_sec_fa = fa(student_factors_sec, nfactors =3, cor='tet')
+
+print(student_factors_sec_fa$loadings, cutoff = 0.3)
+
+fa.parallel(management_factors_sec, cor='tet', fa = 'fa')
+
+management_factors_sec_fa = fa(management_factors_sec, nfactors =4,cor='tet')
+
+print(management_factors_sec_fa$loadings, cutoff = 0.3)
+
 ```
 
 ##Parental Community Variables - Factor Analysis
@@ -136,6 +158,24 @@ parental_community <- df[, c("C0196", "C0198", "C0190", "C0192", "C0204", "C0206
 colnames(parental_community) <- c("open_house", "parent_teacher_conf", "disciplinary_process", "parent_training_assist", "parenthelp_drug", "socialshelp_drug", "juvhelp_drug", "lawhelp_drug", "mhhelp_drug", "civichelp_drug", "privatehelp_drug", "relighelp_drug")
 
 parental_community <- na.omit(parental_community) #making sure that no NA values remain#
+
+glimpse(parental_community)
+
+parental <- parental_community[1:5]
+
+fa.parallel(parental, cor='mixed', fa = 'fa') 
+
+factor_parents = fa(parental, nfactors =2, rotate = "oblimin", cor = 'mixed')
+
+print(factor_parents$loadings, cutoff = 0.4)
+
+community <- parental_community[6:12]
+
+fa.parallel(community, cor='tet', fa = 'fa')
+
+factor_community = fa(community, nfactors =2, rotate = "oblimin", cor='tet')
+
+print(factor_community$loadings, cutoff = 0.4)
 ```
 
 ##Student Education Variables - Factor Analysis
@@ -146,6 +186,14 @@ student_education <- df[, c("C0174", "C0183", "C0176", "C0181", "C0175", "C0177"
 colnames(student_education) <- c("prevention_curriculum", "sel", "behav_mod", "mentoring", "peer_mediation", "student_court", "restorative_circles", "promote_community")
 
 student_education <- na.omit(student_education) #making sure that no NA values remain#
+
+fa.parallel(student_education, cor='tet',fa = 'fa')
+
+factor_student_ed = fa(student_education, nfactors =4, rotate = 'oblimin', cor='tet')
+
+print(factor_student_ed$loadings, cutoff = 0.4)
+
+print(factor_student_ed)
 ```
 
 ##Loading into One Data.Frame 
