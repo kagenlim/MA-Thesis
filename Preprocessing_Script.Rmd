@@ -132,13 +132,13 @@ for (vars in colnames(security)){
   security[[vars]] = as.numeric(result)
 }
 
-student_factors_sec <- security[, c("visitor_badge", "require_check", "random_check", "random_sweep", "drug_testing", "wear_uniform", "dress_code", "book_bags", "student_id", "prohibit_phone", "emergency_notif", "anonymous_report", "radio", "staff_id")]
+student_factors_sec <- security[, c("random_check", "random_sweep", "drug_testing", "dress_code", "lock_inside", "close_lunch", "security_camera", "anonymous_report")]
 
-management_factors_sec <- security[, c("control_building", "control_ground", "lock_inside", "close_lunch", "school_lockers", "panic_button", "security_camera")]
+management_factors_sec <- security[, c("visitor_badge", "emergency_notif", "radio", "control_building", "control_ground", "lock_inside", "close_lunch", "school_lockers", "panic_button", "security_camera", "staff_id", "anonymous_report","student_id", "book_bags", "prohibit_phone", "require_check", "wear_uniform")]
 
 fa.parallel(student_factors_sec, cor='tet', fa = 'fa')
 
-student_factors_sec_fa = fa(student_factors_sec, nfactors =6, cor='tet')
+student_factors_sec_fa = fa(student_factors_sec, rotate = "oblimin", nfactors =4, cor='tet')
 
 print(student_factors_sec_fa$loadings, cutoff = 0.3)
 
@@ -196,6 +196,8 @@ for (vars in colnames(student_education)){
 }
 
 student_education <- na.omit(student_education) #making sure that no NA values remain#
+
+glimpse(student_education)
 
 fa.parallel(student_education, cor='tet',fa = 'fa')
 
@@ -256,7 +258,7 @@ glimpse(sub)
 ##Save Output of Preprocessing
 ```{r Output}
 
-
+write.csv(sub,"/Users/kagenlim/Documents/GitHub/MA-Thesis/preprocessedstudy1.csv", row.names = FALSE)
 ```
  
 ```{r Descriptive Statistics}
