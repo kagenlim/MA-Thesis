@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Kagen Lim" />
+  <meta name="dcterms.date" content="2020-03-08" />
+  <title>Kagen's Thesis Results</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="container-fluid main-container">
+<div id="header" class="fluid-row">
+<h1 class="title toc-ignore" id="initial-results-for-thesis">Initial Results for Thesis</h1>
+<h2 class="subtitle toc-ignore" id ="subtitle">Examining Inequality in American School Safety: Hierarchical Regression and Interpretable Machine Learning Modelling Approaches</h2>
+<h4 class="author" id="kagen-lim">Kagen Lim (kagen.lim@columbia.edu)</h4>
+<h4 class="date" id="march-2020">8 March 2021</h4>
+</div>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In recent years, high-profile school shootings in the United States of America have brought the issue of school safety to the forefront of international and national attention. Mass shootings, as devastating as they are, compose merely one kind of school safety threat; there are many potential scenarios that might result in severe, long-term or even fatal consequences on school-going children and teenagers across the United States (U.S.). In a more sinister vein, the prevalence of such incidents might even be unequally distributed across the school-going population. One postulation, in line with the differential opportunities theory of crime and deviance, might be that students of lower social class experience school environments that are less safe, given the existence of delinquent subcultures in their schools (Cloward &amp; Ohlin, 1960).</p>
+<p>Through two studies in this thesis, which each take different quantitative approaches on the same dataset, I investigate the validity of the differential opportunities theory in accounting for socio-economic variation, within the domain of school safety. The following research question is pursued: how might socio-economic factors explain school safety, within American schools, specifically safety concerns with regard to violent incidents? This thesis utilizes the most recent edition (i.e., 2017-2018) of the School Survey of Crime and Safety (SSOCS), a cross-sectional study of American K-12 public schools by the U.S. Department of Education, and therefore is contextualized within the United States; the samples within these surveys are selected to be representative of the population of K-12 public schools across the U.S. (U.S. Department of Education, n.d.). This thesis is a contribution to extant literature in two ways. First, it is a topical contribution toward school safety, by explaining the uneven distribution of school safety threats across social class, therefore informing education and security policymaking. This adds functional value and precision to the prevention of school safety incidents. Second, it also contains a methodological contribution of integrating conventional regression modelling approaches in the social sciences with interpretable machine learning approaches, which are of great relevance today, given the burgeoning interest within the of explainable artificial intelligence (also known as XAI).</p>
+<p>In Study 1, I investigate socio-economic variation in school safety by performing Ordinary Least Squares (OLS) regression modelling, to derive unbiased estimates of socio-economic effects that explain school safety, net of relevant explanatory and control variables, in a theoretically-driven way. A hierarchical regression approach is taken, to isolate the how individual explanatory and control variables contribute to explained variance in the dependent variable. Linear regressions like the OLS regression, however, are plagued by problems of multicollinearity when the explanatory variables are not independent of each other (Yoo et al., 2014). Such violation of the Gauss-Markov assumptions of linear regression results in biased estimators, distorting the coefficient values that are used to estimate the relationship between each given explanatory variable and the given dependent variable. Thus, when a large number of explanatory variables are of concurrent interest, as is the case with much of social scientific research in modelling complex phenomena through multivariate methods, there might be challenges amassing patterns using linear regressions. At the same time, methodological opportunities to use interpretable machine learning models are emerging, with developments in XAI showing that there is renewed interest in the interpretability of machine learning models that have a reputation for being ‘black boxes’ (Adadi &amp; Berrada, 2018). Social scientists are increasingly cognizant of this trend, and are beginning to deploy machine learning models as an alternative to general linear models even for problems where explanation and interpretability are valued. Some of these models, like random forest regressors, are nonlinear models that are adept at ascertaining relationships between a large number of input features, and a given output variable. These application of such nonlinear machine learning models can allow researchers to entirely avoid problems of multicollinearity between features; these are also relevant for XAI goals, such as through the calculation of permutation importance scores in random forest models, to assess the contribution of given features to some given model’s prediction accuracy (Breiman, 2001; Breiman et al., 2001). Machine learning methods are thus utilized in Study 2a, on the same set of theoretically-derived features in Study 1. This enables the calculation of the relative permutation importance of each input feature on the ability to predict school safety outcomes, leading to additional insight into socio-economic variation in school safety, the primary research question of this thesis. Then, in a more data-driven way, I include more variables from the 2017-2018 SSOCS in Study 2b, some of which have not been considered together in the wider literature, to evaluate the relative permutation importance of each feature on school safety outcomes.</p>
+<section id="loading-in-variables" class="level2">
+<h2>Loading in Variables</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">load</span>(<span class="st">&quot;my_work_space.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>sub =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;preprocessedstudy1.csv&#39;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="kw">colnames</span>(sub)</span></code></pre></div>
+<pre><code>##  [1] &quot;total_incidentslog1p&quot;    &quot;percentlowgradeslog1p&quot;
+##  [3] &quot;percentacadnotimptlog1p&quot; &quot;school_size&quot;
+##  [5] &quot;urban&quot;                   &quot;crime_live_recode&quot;
+##  [7] &quot;crime_area_recode&quot;       &quot;school_type&quot;
+##  [9] &quot;visitor_badge&quot;           &quot;control_building&quot;
+## [11] &quot;control_ground&quot;          &quot;require_check&quot;
+## [13] &quot;random_check&quot;            &quot;lock_inside&quot;
+## [15] &quot;close_lunch&quot;             &quot;random_sweep&quot;
+## [17] &quot;drug_testing&quot;            &quot;wear_uniform&quot;
+## [19] &quot;dress_code&quot;              &quot;school_lockers&quot;
+## [21] &quot;book_bags&quot;               &quot;panic_button&quot;
+## [23] &quot;emergency_notif&quot;         &quot;anonymous_report&quot;
+## [25] &quot;student_id&quot;              &quot;staff_id&quot;
+## [27] &quot;security_camera&quot;         &quot;radio&quot;
+## [29] &quot;prohibit_phone&quot;          &quot;open_house&quot;
+## [31] &quot;parent_teacher_conf&quot;     &quot;disciplinary_process&quot;
+## [33] &quot;parent_training_assist&quot;  &quot;parenthelp_drug&quot;
+## [35] &quot;socialshelp_drug&quot;        &quot;juvhelp_drug&quot;
+## [37] &quot;lawhelp_drug&quot;            &quot;mhhelp_drug&quot;
+## [39] &quot;civichelp_drug&quot;          &quot;privatehelp_drug&quot;
+## [41] &quot;relighelp_drug&quot;          &quot;prevention_curriculum&quot;
+## [43] &quot;sel&quot;                     &quot;behav_mod&quot;
+## [45] &quot;mentoring&quot;               &quot;peer_mediation&quot;
+## [47] &quot;student_court&quot;           &quot;restorative_circles&quot;
+## [49] &quot;promote_community&quot;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">library</span>(tibble)</span></code></pre></div>
+<pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.0.2</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">glimpse</span>(sub)</span></code></pre></div>
+<pre><code>## Rows: 2,762
+## Columns: 49
+## $ total_incidentslog1p    &lt;dbl&gt; 2.3978953, 2.8332133, 2.5649494, 3.2580965, 1…
+## $ percentlowgradeslog1p   &lt;dbl&gt; 2.772589, 1.791759, 1.791759, 2.397895, 1.386…
+## $ percentacadnotimptlog1p &lt;dbl&gt; 3.433987, 4.394449, 1.791759, 2.772589, 1.098…
+## $ school_size             &lt;int&gt; 3, 2, 3, 4, 3, 3, 4, 2, 3, 2, 3, 4, 4, 4, 4, …
+## $ urban                   &lt;int&gt; 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, …
+## $ crime_live_recode       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 2, …
+## $ crime_area_recode       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, …
+## $ school_type             &lt;chr&gt; &quot;Middle_Combined&quot;, &quot;Middle_Combined&quot;, &quot;Middle…
+## $ visitor_badge           &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ control_building        &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, …
+## $ control_ground          &lt;int&gt; 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, …
+## $ require_check           &lt;int&gt; 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ random_check            &lt;int&gt; 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ lock_inside             &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, …
+## $ close_lunch             &lt;int&gt; 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, …
+## $ random_sweep            &lt;int&gt; 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, …
+## $ drug_testing            &lt;int&gt; 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, …
+## $ wear_uniform            &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, …
+## $ dress_code              &lt;int&gt; 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, …
+## $ school_lockers          &lt;int&gt; 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, …
+## $ book_bags               &lt;int&gt; 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, …
+## $ panic_button            &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, …
+## $ emergency_notif         &lt;int&gt; 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, …
+## $ anonymous_report        &lt;int&gt; 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, …
+## $ student_id              &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ staff_id                &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, …
+## $ security_camera         &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ radio                   &lt;int&gt; 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, …
+## $ prohibit_phone          &lt;int&gt; 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, …
+## $ open_house              &lt;int&gt; 4, 2, 4, 4, 3, 4, 3, 2, 1, 4, 4, 4, 2, 3, 2, …
+## $ parent_teacher_conf     &lt;int&gt; 1, 4, 4, 2, 3, 4, 3, 4, 1, 4, 3, 2, 3, 1, 2, …
+## $ disciplinary_process    &lt;int&gt; 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, …
+## $ parent_training_assist  &lt;int&gt; 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, …
+## $ parenthelp_drug         &lt;int&gt; 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, …
+## $ socialshelp_drug        &lt;int&gt; 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, …
+## $ juvhelp_drug            &lt;int&gt; 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, …
+## $ lawhelp_drug            &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ mhhelp_drug             &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, …
+## $ civichelp_drug          &lt;int&gt; 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, …
+## $ privatehelp_drug        &lt;int&gt; 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, …
+## $ relighelp_drug          &lt;int&gt; 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, …
+## $ prevention_curriculum   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ sel                     &lt;int&gt; 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, …
+## $ behav_mod               &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, …
+## $ mentoring               &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ peer_mediation          &lt;int&gt; 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, …
+## $ student_court           &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ restorative_circles     &lt;int&gt; 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ promote_community       &lt;int&gt; 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …</code></pre>
+</section>
+</section>
+<section id="study-1-intitial-results" class="level1">
+<h1>Study 1 Intitial Results</h1>
+<p>Statistical Computing is done in R for this section. In this section, I build linear regressions hierarchically to consider variables that I found were important to consider for modelling school safety.</p>
+<p>In my base model, I consider two socioeconomic variables that approximate the percentage of students with low grades and those who do not consider academic performance to be important in schools; these are two features that provide a good indicator of dentifying students who are disadvantaged.</p>
+<p>I also consider a few control variables for the <code>school size</code> (i.e., ordinal variable with four levels, indicating how many students there are in the school, with larger values indicating a larger school), an indicator variable for whether the school is <code>urban</code> or not, and two ordinal variables with three levels (<em>low, medium, high</em>), <code>crime_live_recode</code> and <code>crime_area_recode</code>, which approximate the level of crime around where students live, and the level of crime in the vicinity around the school. These control variables were demographic variables that were previously considered by schools too.</p>
+<p>The following variables are indicator variables (coded as 1 or 0 for presence or absence) for whether given physical security features were implemented at a school: “visitor_badge”, “control_building”, “control_ground”, “require_check”, random_check“,”lock_inside“,”close_lunch“,”random_sweep“,”drug_testing“,”wear_uniform“,”dress_code“,”school_lockers“,”book_bags“,”panic_button“, emergency_notif”, “anonymous_report”, “student_id”, “staff_id”, “security_camera”, “radio”, prohibit_phone". For Study 1, I consider only <code>random_sweep</code>, <code>require_check</code>, <code>random_check</code>, <code>prohibit_phone</code>, <code>security_camera</code> as these were based in the literature, but for the machine learning modelling segment of the thesis I consider more of these variables.</p>
+<p>The following are ordinal or indicator variables (coded as 1 or 0 for presence or absence) that capture parental and community involvement: “open_house”, “parent_teacher_conf”, “disciplinary_process”, “parent_training_assist”, “parenthelp_drug”, “socialshelp_drug”, “juvhelp_drug”, “lawhelp_drug”, “mhhelp_drug”, “civichelp_drug”, privatehelp_drug“,”relighelp_drug". <code>open_house</code> and <code>parent_teacher_conf</code> are the only ordinal variables in this section, indicating the proportion of students who had at least one parent who participated in a open house or a parent teacher conference. In the order that they were listed, the rest were indicator variables indicator whether parents were consulted in the disciplinary process for schools (<code>disciplinary_process</code>), whether parents were provided assistance in the form of training initiatives on how to better help their children (<code>parent_training_assist</code>). The rest of the variables captured whether parents, social service agencies, juvenile protection agencies, legal organizations, mental health organizations, civic organizations, private enterprises were involved in drug prevention efforts for those specific schools.</p>
+<p>The following are indicator variables (coded as 1 or 0 for presence or absence) that capture the efforts or policies that schools invested in educating their students on skills that might help enhance school safety: “prevention_curriculum”, “sel” (socio-emotional learning), “behav_mod” (behavioural modification training), “mentoring”, “peer_mediation”, “student_court”, “restorative_circles”, “promote_community”.</p>
+<p>At each stage of these process, I drop variables if they are not statistically significant, unless they are key control variables that were included in the base model.</p>
+<section id="base-model" class="level2">
+<h2>Base Model</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>lm1 =<span class="st"> </span><span class="kw">lm</span>(total_incidentslog1p <span class="op">~</span><span class="st"> </span>percentlowgradeslog1p <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p <span class="op">+</span><span class="st"> </span>school_size <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>crime_area_recode <span class="op">+</span><span class="st"> </span>crime_live_recode <span class="op">+</span><span class="st"> </span><span class="kw">as.factor</span>(school_type), sub)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="kw">library</span>(lmtest)</span></code></pre></div>
+<pre><code>## Warning: package &#39;lmtest&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
+<pre><code>## Warning: package &#39;zoo&#39; was built under R version 4.0.2</code></pre>
+<pre><code>##
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+##
+##     as.Date, as.Date.numeric</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="kw">resettest</span>(lm1, <span class="dt">power =</span> <span class="dv">3</span>) <span class="co">#no evidence that a square term would need to be included</span></span></code></pre></div>
+<pre><code>##
+##  RESET test
+##
+## data:  lm1
+## RESET = 2.8397, df1 = 1, df2 = 2752, p-value = 0.09208</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="kw">resettest</span>(lm1, <span class="dt">power =</span> <span class="dv">3</span>) <span class="co">#no evidence that a cube term would need to be included</span></span></code></pre></div>
+<pre><code>##
+##  RESET test
+##
+## data:  lm1
+## RESET = 2.8397, df1 = 1, df2 = 2752, p-value = 0.09208</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="kw">bptest</span>(lm1) <span class="co">#violation of BPTest. Going forward, need to use corrected, robust standard errors. </span></span></code></pre></div>
+<pre><code>##
+##  studentized Breusch-Pagan test
+##
+## data:  lm1
+## BP = 94.262, df = 8, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="kw">library</span>(rms)</span></code></pre></div>
+<pre><code>## Warning: package &#39;rms&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Loading required package: Hmisc</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: survival</code></pre>
+<pre><code>## Loading required package: Formula</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: replacing previous import &#39;vctrs::data_frame&#39; by &#39;tibble::data_frame&#39;
+## when loading &#39;dplyr&#39;</code></pre>
+<pre><code>##
+## Attaching package: &#39;Hmisc&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+##
+##     format.pval, units</code></pre>
+<pre><code>## Loading required package: SparseM</code></pre>
+<pre><code>## Warning: package &#39;SparseM&#39; was built under R version 4.0.2</code></pre>
+<pre><code>##
+## Attaching package: &#39;SparseM&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+##
+##     backsolve</code></pre>
+<pre><code>##
+## Attaching package: &#39;rms&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:lmtest&#39;:
+##
+##     lrtest</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a>sub<span class="op">$</span>school_type &lt;-<span class="st"> </span><span class="kw">factor</span>(sub<span class="op">$</span>school_type)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true"></a>lm1<span class="fl">.1</span> =<span class="st"> </span><span class="kw">ols</span>(total_incidentslog1p <span class="op">~</span><span class="st"> </span>percentlowgradeslog1p <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p <span class="op">+</span><span class="st"> </span>school_size <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>crime_live_recode <span class="op">+</span><span class="st"> </span>crime_area_recode, <span class="dt">data =</span> sub, <span class="dt">x =</span> T, <span class="dt">y =</span> T)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true"></a>lm1<span class="fl">.2</span> =<span class="st"> </span><span class="kw">robcov</span>(lm1<span class="fl">.1</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true"></a><span class="kw">print</span>(lm1<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## Linear Regression Model
+##
+##  ols(formula = total_incidentslog1p ~ percentlowgradeslog1p +
+##      percentacadnotimptlog1p + school_size + urban + crime_live_recode +
+##      crime_area_recode, data = sub, x = T, y = T)
+##
+##                   Model Likelihood    Discrimination
+##                         Ratio Test           Indexes
+##  Obs    2762    LR chi2    1000.44    R2       0.304
+##  sigma1.1358    d.f.             6    R2 adj   0.302
+##  d.f.   2755    Pr(&gt; chi2)  0.0000    g        0.853
+##
+##  Residuals
+##
+##      Min      1Q  Median      3Q     Max
+##  -3.7837 -0.6528  0.1303  0.7840  3.4488
+##
+##
+##                          Coef    S.E.   t     Pr(&gt;|t|)
+##  Intercept               -0.8746 0.1073 -8.15 &lt;0.0001
+##  percentlowgradeslog1p    0.1462 0.0262  5.58 &lt;0.0001
+##  percentacadnotimptlog1p  0.2328 0.0238  9.78 &lt;0.0001
+##  school_size              0.6957 0.0229 30.35 &lt;0.0001
+##  urban                   -0.0982 0.0520 -1.89 0.0590
+##  crime_live_recode        0.2840 0.0474  5.99 &lt;0.0001
+##  crime_area_recode        0.0390 0.0538  0.73 0.4683
+## </code></pre>
+</section>
+<section id="including-security-variables" class="level2">
+<h2>Including Security Variables</h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a>lm2 =<span class="st"> </span><span class="kw">ols</span>(total_incidentslog1p <span class="op">~</span><span class="st"> </span>percentlowgradeslog1p <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p <span class="op">+</span><span class="st"> </span>school_size <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>crime_live_recode <span class="op">+</span><span class="st"> </span>crime_area_recode <span class="op">+</span><span class="st"> </span>school_type <span class="op">+</span><span class="st"> </span>random_sweep <span class="op">+</span><span class="st"> </span>require_check <span class="op">+</span><span class="st"> </span>random_check <span class="op">+</span><span class="st"> </span>prohibit_phone <span class="op">+</span><span class="st"> </span>security_camera, <span class="dt">data =</span> sub, <span class="dt">x =</span> T, <span class="dt">y =</span> T)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true"></a>lm2<span class="fl">.1</span> =<span class="st"> </span><span class="kw">robcov</span>(lm2)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true"></a><span class="kw">lrtest</span>(lm2<span class="fl">.1</span>, lm1<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>##
+## Model 1: total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p +
+##     school_size + urban + crime_live_recode + crime_area_recode +
+##     school_type + random_sweep + require_check + random_check +
+##     prohibit_phone + security_camera
+## Model 2: total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p +
+##     school_size + urban + crime_live_recode + crime_area_recode
+##
+## L.R. Chisq       d.f.          P
+##   386.7311     7.0000     0.0000</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true"></a><span class="kw">print</span>(lm2<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## Linear Regression Model
+##
+##  ols(formula = total_incidentslog1p ~ percentlowgradeslog1p +
+##      percentacadnotimptlog1p + school_size + urban + crime_live_recode +
+##      crime_area_recode + school_type + random_sweep + require_check +
+##      random_check + prohibit_phone + security_camera, data = sub,
+##      x = T, y = T)
+##
+##                   Model Likelihood    Discrimination
+##                         Ratio Test           Indexes
+##  Obs    2762    LR chi2    1387.17    R2       0.395
+##  sigma1.0604    d.f.            13    R2 adj   0.392
+##  d.f.   2748    Pr(&gt; chi2)  0.0000    g        0.974
+##
+##  Residuals
+##
+##       Min       1Q   Median       3Q      Max
+##  -3.96357 -0.64839  0.05863  0.70423  3.97531
+##
+##
+##                              Coef    S.E.   t     Pr(&gt;|t|)
+##  Intercept                   -1.2310 0.1233 -9.98 &lt;0.0001
+##  percentlowgradeslog1p        0.1597 0.0242  6.61 &lt;0.0001
+##  percentacadnotimptlog1p      0.1862 0.0226  8.22 &lt;0.0001
+##  school_size                  0.5275 0.0239 22.05 &lt;0.0001
+##  urban                        0.0658 0.0491  1.34 0.1804
+##  crime_live_recode            0.2759 0.0450  6.13 &lt;0.0001
+##  crime_area_recode            0.0817 0.0509  1.61 0.1085
+##  school_type=High             0.9764 0.0704 13.88 &lt;0.0001
+##  school_type=Middle_Combined  0.7884 0.0632 12.48 &lt;0.0001
+##  random_sweep                 0.1346 0.0456  2.95 0.0032
+##  require_check               -0.1803 0.1435 -1.26 0.2091
+##  random_check                -0.0273 0.0925 -0.30 0.7677
+##  prohibit_phone              -0.1063 0.0436 -2.44 0.0148
+##  security_camera              0.1387 0.0760  1.82 0.0682
+## </code></pre>
+</section>
+<section id="including-parental-involvement-variables" class="level2">
+<h2>Including Parental Involvement Variables</h2>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true"></a>lm3 =<span class="st"> </span><span class="kw">ols</span>(total_incidentslog1p <span class="op">~</span><span class="st"> </span>percentlowgradeslog1p <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p <span class="op">+</span><span class="st"> </span>school_size <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>crime_live_recode <span class="op">+</span><span class="st"> </span>crime_area_recode <span class="op">+</span>school_type<span class="op">+</span><span class="st"> </span>random_sweep <span class="op">+</span><span class="st"> </span>prohibit_phone <span class="op">+</span><span class="st"> </span>security_camera <span class="op">+</span><span class="st"> </span>open_house <span class="op">+</span><span class="st"> </span>parent_teacher_conf <span class="op">+</span><span class="st"> </span>disciplinary_process <span class="op">+</span><span class="st"> </span>parent_training_assist <span class="op">+</span><span class="st"> </span>parenthelp_drug, <span class="dt">data =</span> sub, <span class="dt">x =</span> T, <span class="dt">y =</span> T)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true"></a>lm3<span class="fl">.1</span> =<span class="st"> </span><span class="kw">robcov</span>(lm3)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true"></a><span class="kw">lrtest</span>(lm2<span class="fl">.1</span>, lm3<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>##
+## Model 1: total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p +
+##     school_size + urban + crime_live_recode + crime_area_recode +
+##     school_type + random_sweep + require_check + random_check +
+##     prohibit_phone + security_camera
+## Model 2: total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p +
+##     school_size + urban + crime_live_recode + crime_area_recode +
+##     school_type + random_sweep + prohibit_phone + security_camera +
+##     open_house + parent_teacher_conf + disciplinary_process +
+##     parent_training_assist + parenthelp_drug
+##
+##   L.R. Chisq         d.f.            P
+## 3.166408e+01 3.000000e+00 6.159910e-07</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true"></a><span class="kw">print</span>(lm3<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## Linear Regression Model
+##
+##  ols(formula = total_incidentslog1p ~ percentlowgradeslog1p +
+##      percentacadnotimptlog1p + school_size + urban + crime_live_recode +
+##      crime_area_recode + school_type + random_sweep + prohibit_phone +
+##      security_camera + open_house + parent_teacher_conf + disciplinary_process +
+##      parent_training_assist + parenthelp_drug, data = sub, x = T,
+##      y = T)
+##
+##                   Model Likelihood    Discrimination
+##                         Ratio Test           Indexes
+##  Obs    2762    LR chi2    1418.84    R2       0.402
+##  sigma1.0549    d.f.            16    R2 adj   0.398
+##  d.f.   2745    Pr(&gt; chi2)  0.0000    g        0.983
+##
+##  Residuals
+##
+##      Min      1Q  Median      3Q     Max
+##  -4.0560 -0.6478  0.0617  0.7213  4.0076
+##
+##
+##                              Coef    S.E.   t     Pr(&gt;|t|)
+##  Intercept                   -0.5658 0.1710 -3.31 0.0009
+##  percentlowgradeslog1p        0.1492 0.0239  6.24 &lt;0.0001
+##  percentacadnotimptlog1p      0.1646 0.0230  7.15 &lt;0.0001
+##  school_size                  0.5321 0.0239 22.28 &lt;0.0001
+##  urban                        0.0619 0.0491  1.26 0.2076
+##  crime_live_recode            0.2438 0.0443  5.50 &lt;0.0001
+##  crime_area_recode            0.0579 0.0508  1.14 0.2540
+##  school_type=High             0.8313 0.0741 11.21 &lt;0.0001
+##  school_type=Middle_Combined  0.7339 0.0636 11.54 &lt;0.0001
+##  random_sweep                 0.1120 0.0454  2.47 0.0136
+##  prohibit_phone              -0.1118 0.0435 -2.57 0.0102
+##  security_camera              0.1278 0.0759  1.69 0.0921
+##  open_house                  -0.1083 0.0256 -4.23 &lt;0.0001
+##  parent_teacher_conf         -0.0397 0.0199 -1.99 0.0463
+##  disciplinary_process         0.0243 0.0414  0.59 0.5574
+##  parent_training_assist       0.0531 0.0415  1.28 0.2015
+##  parenthelp_drug             -0.0158 0.0441 -0.36 0.7196
+## </code></pre>
+</section>
+<section id="including-community-involvement-variables" class="level2">
+<h2>Including Community Involvement Variables</h2>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true"></a>lm4 =<span class="st"> </span><span class="kw">ols</span>(total_incidentslog1p <span class="op">~</span><span class="st"> </span>percentlowgradeslog1p <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p <span class="op">+</span><span class="st"> </span>school_size <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>crime_live_recode <span class="op">+</span><span class="st"> </span>crime_area_recode <span class="op">+</span><span class="st">  </span>school_type <span class="op">+</span><span class="st"> </span>random_sweep <span class="op">+</span><span class="st"> </span>prohibit_phone <span class="op">+</span><span class="st"> </span>security_camera <span class="op">+</span><span class="st"> </span>open_house <span class="op">+</span><span class="st"> </span>parent_teacher_conf <span class="op">+</span><span class="st"> </span>socialshelp_drug <span class="op">+</span><span class="st"> </span>juvhelp_drug <span class="op">+</span><span class="st"> </span>lawhelp_drug <span class="op">+</span><span class="st"> </span>mhhelp_drug <span class="op">+</span><span class="st"> </span>civichelp_drug <span class="op">+</span><span class="st"> </span>privatehelp_drug <span class="op">+</span><span class="st"> </span>relighelp_drug, <span class="dt">data =</span> sub, <span class="dt">x =</span> T, <span class="dt">y =</span> T)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true"></a>lm4<span class="fl">.1</span> =<span class="st"> </span><span class="kw">robcov</span>(lm4)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true"></a><span class="kw">lrtest</span>(lm4<span class="fl">.1</span>, lm3<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>##
+## Model 1: total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p +
+##     school_size + urban + crime_live_recode + crime_area_recode +
+##     school_type + random_sweep + prohibit_phone + security_camera +
+##     open_house + parent_teacher_conf + socialshelp_drug + juvhelp_drug +
+##     lawhelp_drug + mhhelp_drug + civichelp_drug + privatehelp_drug +
+##     relighelp_drug
+## Model 2: total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p +
+##     school_size + urban + crime_live_recode + crime_area_recode +
+##     school_type + random_sweep + prohibit_phone + security_camera +
+##     open_house + parent_teacher_conf + disciplinary_process +
+##     parent_training_assist + parenthelp_drug
+##
+##   L.R. Chisq         d.f.            P
+## 4.484687e+01 4.000000e+00 4.278356e-09</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true"></a><span class="kw">print</span>(lm4<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## Linear Regression Model
+##
+##  ols(formula = total_incidentslog1p ~ percentlowgradeslog1p +
+##      percentacadnotimptlog1p + school_size + urban + crime_live_recode +
+##      crime_area_recode + school_type + random_sweep + prohibit_phone +
+##      security_camera + open_house + parent_teacher_conf + socialshelp_drug +
+##      juvhelp_drug + lawhelp_drug + mhhelp_drug + civichelp_drug +
+##      privatehelp_drug + relighelp_drug, data = sub, x = T, y = T)
+##
+##                   Model Likelihood    Discrimination
+##                         Ratio Test           Indexes
+##  Obs    2762    LR chi2    1463.68    R2       0.411
+##  sigma1.0471    d.f.            20    R2 adj   0.407
+##  d.f.   2741    Pr(&gt; chi2)  0.0000    g        0.994
+##
+##  Residuals
+##
+##       Min       1Q   Median       3Q      Max
+##  -4.05760 -0.64951  0.06811  0.69373  4.00908
+##
+##
+##                              Coef    S.E.   t     Pr(&gt;|t|)
+##  Intercept                   -0.6148 0.1736 -3.54 0.0004
+##  percentlowgradeslog1p        0.1388 0.0236  5.88 &lt;0.0001
+##  percentacadnotimptlog1p      0.1593 0.0227  7.02 &lt;0.0001
+##  school_size                  0.5294 0.0236 22.46 &lt;0.0001
+##  urban                        0.0707 0.0487  1.45 0.1471
+##  crime_live_recode            0.2417 0.0437  5.53 &lt;0.0001
+##  crime_area_recode            0.0578 0.0501  1.15 0.2488
+##  school_type=High             0.7622 0.0753 10.12 &lt;0.0001
+##  school_type=Middle_Combined  0.7029 0.0641 10.96 &lt;0.0001
+##  random_sweep                 0.0862 0.0454  1.90 0.0577
+##  prohibit_phone              -0.1169 0.0430 -2.72 0.0066
+##  security_camera              0.0965 0.0752  1.28 0.1996
+##  open_house                  -0.1096 0.0255 -4.30 &lt;0.0001
+##  parent_teacher_conf         -0.0345 0.0198 -1.74 0.0814
+##  socialshelp_drug             0.0332 0.0528  0.63 0.5292
+##  juvhelp_drug                 0.1498 0.0470  3.19 0.0014
+##  lawhelp_drug                -0.0339 0.0653 -0.52 0.6034
+##  mhhelp_drug                  0.1252 0.0494  2.54 0.0113
+##  civichelp_drug               0.0072 0.0458  0.16 0.8753
+##  privatehelp_drug             0.0198 0.0497  0.40 0.6906
+##  relighelp_drug               0.1208 0.0468  2.58 0.0099
+## </code></pre>
+</section>
+<section id="including-student-education-variables" class="level2">
+<h2>Including Student Education Variables</h2>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true"></a>lm5 =<span class="st"> </span><span class="kw">ols</span>(total_incidentslog1p <span class="op">~</span><span class="st"> </span>percentlowgradeslog1p <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p <span class="op">+</span><span class="st"> </span>school_size <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>crime_live_recode <span class="op">+</span><span class="st"> </span>crime_area_recode <span class="op">+</span>school_type <span class="op">+</span><span class="st">  </span>random_sweep <span class="op">+</span><span class="st"> </span>prohibit_phone <span class="op">+</span><span class="st"> </span>open_house <span class="op">+</span><span class="st"> </span>parent_teacher_conf <span class="op">+</span><span class="st"> </span>mhhelp_drug <span class="op">+</span><span class="st"> </span>juvhelp_drug<span class="op">+</span><span class="st"> </span>relighelp_drug <span class="op">+</span><span class="st"> </span>prevention_curriculum <span class="op">+</span><span class="st"> </span>sel <span class="op">+</span><span class="st"> </span>behav_mod <span class="op">+</span><span class="st"> </span>mentoring <span class="op">+</span><span class="st"> </span>peer_mediation <span class="op">+</span><span class="st"> </span>student_court <span class="op">+</span><span class="st"> </span>restorative_circles <span class="op">+</span><span class="st"> </span>promote_community, <span class="dt">data =</span> sub, <span class="dt">x =</span> T, <span class="dt">y =</span> T)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true"></a>lm5<span class="fl">.1</span> =<span class="st"> </span><span class="kw">robcov</span>(lm5)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true"></a><span class="kw">lrtest</span>(lm5<span class="fl">.1</span>, lm4<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>##
+## Model 1: total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p +
+##     school_size + urban + crime_live_recode + crime_area_recode +
+##     school_type + random_sweep + prohibit_phone + open_house +
+##     parent_teacher_conf + mhhelp_drug + juvhelp_drug + relighelp_drug +
+##     prevention_curriculum + sel + behav_mod + mentoring + peer_mediation +
+##     student_court + restorative_circles + promote_community
+## Model 2: total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p +
+##     school_size + urban + crime_live_recode + crime_area_recode +
+##     school_type + random_sweep + prohibit_phone + security_camera +
+##     open_house + parent_teacher_conf + socialshelp_drug + juvhelp_drug +
+##     lawhelp_drug + mhhelp_drug + civichelp_drug + privatehelp_drug +
+##     relighelp_drug
+##
+## L.R. Chisq       d.f.          P
+##  5.0684449  3.0000000  0.1668533</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true"></a><span class="co">#likelihood ratio test</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true"></a><span class="kw">print</span>(lm5<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## Linear Regression Model
+##
+##  ols(formula = total_incidentslog1p ~ percentlowgradeslog1p +
+##      percentacadnotimptlog1p + school_size + urban + crime_live_recode +
+##      crime_area_recode + school_type + random_sweep + prohibit_phone +
+##      open_house + parent_teacher_conf + mhhelp_drug + juvhelp_drug +
+##      relighelp_drug + prevention_curriculum + sel + behav_mod +
+##      mentoring + peer_mediation + student_court + restorative_circles +
+##      promote_community, data = sub, x = T, y = T)
+##
+##                   Model Likelihood    Discrimination
+##                         Ratio Test           Indexes
+##  Obs    2762    LR chi2    1468.75    R2       0.412
+##  sigma1.0467    d.f.            23    R2 adj   0.408
+##  d.f.   2738    Pr(&gt; chi2)  0.0000    g        0.996
+##
+##  Residuals
+##
+##      Min      1Q  Median      3Q     Max
+##  -4.0745 -0.6460  0.0705  0.7048  4.0525
+##
+##
+##                              Coef    S.E.   t     Pr(&gt;|t|)
+##  Intercept                   -0.5662 0.1904 -2.97 0.0030
+##  percentlowgradeslog1p        0.1395 0.0238  5.86 &lt;0.0001
+##  percentacadnotimptlog1p      0.1549 0.0229  6.76 &lt;0.0001
+##  school_size                  0.5317 0.0235 22.65 &lt;0.0001
+##  urban                        0.0750 0.0490  1.53 0.1258
+##  crime_live_recode            0.2408 0.0440  5.47 &lt;0.0001
+##  crime_area_recode            0.0641 0.0503  1.27 0.2026
+##  school_type=High             0.7777 0.0750 10.36 &lt;0.0001
+##  school_type=Middle_Combined  0.7110 0.0638 11.14 &lt;0.0001
+##  random_sweep                 0.0928 0.0450  2.06 0.0394
+##  prohibit_phone              -0.1131 0.0430 -2.63 0.0086
+##  open_house                  -0.1092 0.0252 -4.33 &lt;0.0001
+##  parent_teacher_conf         -0.0345 0.0197 -1.75 0.0796
+##  mhhelp_drug                  0.1356 0.0463  2.93 0.0034
+##  juvhelp_drug                 0.1735 0.0445  3.90 &lt;0.0001
+##  relighelp_drug               0.1388 0.0436  3.19 0.0015
+##  prevention_curriculum       -0.0745 0.0788 -0.95 0.3447
+##  sel                         -0.0196 0.0629 -0.31 0.7549
+##  behav_mod                    0.1738 0.0893  1.95 0.0517
+##  mentoring                   -0.0349 0.0767 -0.45 0.6497
+##  peer_mediation              -0.0496 0.0425 -1.17 0.2425
+##  student_court               -0.0730 0.0668 -1.09 0.2742
+##  restorative_circles         -0.0082 0.0445 -0.18 0.8534
+##  promote_community           -0.0144 0.0613 -0.24 0.8137
+## </code></pre>
+</section>
+<section id="feature-engineering-interaction-terms" class="level2">
+<h2>Feature Engineering: Interaction Terms</h2>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true"></a>lm6 =<span class="st"> </span><span class="kw">ols</span>(total_incidentslog1p <span class="op">~</span><span class="st"> </span>percentlowgradeslog1p <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p <span class="op">+</span><span class="st"> </span>school_size <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>crime_live_recode <span class="op">+</span><span class="st"> </span>crime_area_recode <span class="op">+</span>school_type <span class="op">+</span><span class="st">  </span>random_sweep <span class="op">+</span><span class="st"> </span>prohibit_phone <span class="op">+</span><span class="st"> </span>open_house <span class="op">+</span><span class="st"> </span>parent_teacher_conf <span class="op">+</span><span class="st"> </span>juvhelp_drug<span class="op">+</span><span class="st"> </span>mhhelp_drug <span class="op">+</span><span class="st"> </span>relighelp_drug <span class="op">+</span><span class="st"> </span>behav_mod <span class="op">+</span><span class="st"> </span>percentlowgradeslog1p<span class="op">*</span>open_house <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p<span class="op">*</span>open_house <span class="op">+</span><span class="st"> </span>percentlowgradeslog1p<span class="op">*</span>parent_teacher_conf <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p<span class="op">*</span>parent_teacher_conf, <span class="dt">data =</span> sub, <span class="dt">x =</span> T, <span class="dt">y =</span> T)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true"></a></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true"></a>lm6<span class="fl">.1</span> =<span class="st"> </span><span class="kw">robcov</span>(lm6)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true"></a></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true"></a><span class="kw">print</span>(lm6<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## Linear Regression Model
+##
+##  ols(formula = total_incidentslog1p ~ percentlowgradeslog1p +
+##      percentacadnotimptlog1p + school_size + urban + crime_live_recode +
+##      crime_area_recode + school_type + random_sweep + prohibit_phone +
+##      open_house + parent_teacher_conf + juvhelp_drug + mhhelp_drug +
+##      relighelp_drug + behav_mod + percentlowgradeslog1p * open_house +
+##      percentacadnotimptlog1p * open_house + percentlowgradeslog1p *
+##      parent_teacher_conf + percentacadnotimptlog1p * parent_teacher_conf,
+##      data = sub, x = T, y = T)
+##
+##                   Model Likelihood    Discrimination
+##                         Ratio Test           Indexes
+##  Obs    2762    LR chi2    1467.71    R2       0.412
+##  sigma1.0464    d.f.            20    R2 adj   0.408
+##  d.f.   2741    Pr(&gt; chi2)  0.0000    g        0.995
+##
+##  Residuals
+##
+##       Min       1Q   Median       3Q      Max
+##  -3.95582 -0.65069  0.06736  0.70395  4.01971
+##
+##
+##                                                Coef    S.E.   t     Pr(&gt;|t|)
+##  Intercept                                     -0.1126 0.3277 -0.34 0.7311
+##  percentlowgradeslog1p                          0.0593 0.0780  0.76 0.4476
+##  percentacadnotimptlog1p                        0.0574 0.0774  0.74 0.4584
+##  school_size                                    0.5287 0.0234 22.56 &lt;0.0001
+##  urban                                          0.0691 0.0487  1.42 0.1562
+##  crime_live_recode                              0.2408 0.0436  5.53 &lt;0.0001
+##  crime_area_recode                              0.0621 0.0500  1.24 0.2144
+##  school_type=High                               0.7769 0.0753 10.31 &lt;0.0001
+##  school_type=Middle_Combined                    0.7120 0.0637 11.17 &lt;0.0001
+##  random_sweep                                   0.0903 0.0449  2.01 0.0445
+##  prohibit_phone                                -0.1178 0.0430 -2.74 0.0062
+##  open_house                                    -0.2371 0.1027 -2.31 0.0211
+##  parent_teacher_conf                           -0.0776 0.0799 -0.97 0.3313
+##  juvhelp_drug                                   0.1592 0.0441  3.61 0.0003
+##  mhhelp_drug                                    0.1231 0.0461  2.67 0.0077
+##  relighelp_drug                                 0.1299 0.0436  2.98 0.0029
+##  behav_mod                                      0.1231 0.0813  1.52 0.1298
+##  percentlowgradeslog1p * open_house             0.0322 0.0281  1.15 0.2513
+##  percentacadnotimptlog1p * open_house           0.0132 0.0297  0.44 0.6574
+##  percentlowgradeslog1p * parent_teacher_conf   -0.0064 0.0229 -0.28 0.7802
+##  percentacadnotimptlog1p * parent_teacher_conf  0.0190 0.0243  0.78 0.4336
+## </code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true"></a>lm7 =<span class="st"> </span><span class="kw">ols</span>(total_incidentslog1p <span class="op">~</span><span class="st"> </span>percentlowgradeslog1p <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p <span class="op">+</span><span class="st"> </span>school_size <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>crime_live_recode <span class="op">+</span><span class="st"> </span>crime_area_recode <span class="op">+</span>school_type <span class="op">+</span><span class="st">  </span>random_sweep <span class="op">+</span><span class="st"> </span>prohibit_phone <span class="op">+</span><span class="st"> </span>open_house <span class="op">+</span><span class="st"> </span>parent_teacher_conf <span class="op">+</span><span class="st"> </span>juvhelp_drug<span class="op">+</span><span class="st"> </span>mhhelp_drug <span class="op">+</span><span class="st"> </span>relighelp_drug <span class="op">+</span><span class="st"> </span>percentlowgradeslog1p<span class="op">*</span>juvhelp_drug <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p<span class="op">*</span>juvhelp_drug <span class="op">+</span><span class="st"> </span>percentlowgradeslog1p<span class="op">*</span>mhhelp_drug <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p<span class="op">*</span>mhhelp_drug <span class="op">+</span><span class="st"> </span>percentlowgradeslog1p<span class="op">*</span>relighelp_drug <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p<span class="op">*</span>relighelp_drug, <span class="dt">data =</span> sub, <span class="dt">x =</span> T, <span class="dt">y =</span> T)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true"></a>lm7<span class="fl">.1</span> =<span class="st"> </span><span class="kw">robcov</span>(lm7)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true"></a></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true"></a><span class="kw">print</span>(lm7<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## Linear Regression Model
+##
+##  ols(formula = total_incidentslog1p ~ percentlowgradeslog1p +
+##      percentacadnotimptlog1p + school_size + urban + crime_live_recode +
+##      crime_area_recode + school_type + random_sweep + prohibit_phone +
+##      open_house + parent_teacher_conf + juvhelp_drug + mhhelp_drug +
+##      relighelp_drug + percentlowgradeslog1p * juvhelp_drug + percentacadnotimptlog1p *
+##      juvhelp_drug + percentlowgradeslog1p * mhhelp_drug + percentacadnotimptlog1p *
+##      mhhelp_drug + percentlowgradeslog1p * relighelp_drug + percentacadnotimptlog1p *
+##      relighelp_drug, data = sub, x = T, y = T)
+##
+##                   Model Likelihood    Discrimination
+##                         Ratio Test           Indexes
+##  Obs    2762    LR chi2    1482.98    R2       0.415
+##  sigma1.0437    d.f.            21    R2 adj   0.411
+##  d.f.   2740    Pr(&gt; chi2)  0.0000    g        0.997
+##
+##  Residuals
+##
+##       Min       1Q   Median       3Q      Max
+##  -3.94350 -0.62853  0.06929  0.68969  4.04516
+##
+##
+##                                           Coef    S.E.   t     Pr(&gt;|t|)
+##  Intercept                                -0.8638 0.1854 -4.66 &lt;0.0001
+##  percentlowgradeslog1p                     0.2339 0.0419  5.59 &lt;0.0001
+##  percentacadnotimptlog1p                   0.1876 0.0370  5.07 &lt;0.0001
+##  school_size                               0.5259 0.0235 22.40 &lt;0.0001
+##  urban                                     0.0700 0.0487  1.44 0.1504
+##  crime_live_recode                         0.2438 0.0435  5.60 &lt;0.0001
+##  crime_area_recode                         0.0628 0.0500  1.26 0.2091
+##  school_type=High                          0.7615 0.0743 10.25 &lt;0.0001
+##  school_type=Middle_Combined               0.7048 0.0636 11.07 &lt;0.0001
+##  random_sweep                              0.0996 0.0448  2.22 0.0264
+##  prohibit_phone                           -0.1122 0.0428 -2.62 0.0088
+##  open_house                               -0.1092 0.0252 -4.34 &lt;0.0001
+##  parent_teacher_conf                      -0.0338 0.0196 -1.72 0.0853
+##  juvhelp_drug                              0.5846 0.1550  3.77 0.0002
+##  mhhelp_drug                               0.3373 0.1569  2.15 0.0317
+##  relighelp_drug                            0.2507 0.1630  1.54 0.1241
+##  percentlowgradeslog1p * juvhelp_drug     -0.0312 0.0476 -0.65 0.5127
+##  percentacadnotimptlog1p * juvhelp_drug   -0.1104 0.0468 -2.36 0.0185
+##  percentlowgradeslog1p * mhhelp_drug      -0.1439 0.0497 -2.90 0.0038
+##  percentacadnotimptlog1p * mhhelp_drug     0.0495 0.0473  1.05 0.2959
+##  percentlowgradeslog1p * relighelp_drug    0.0297 0.0500  0.59 0.5522
+##  percentacadnotimptlog1p * relighelp_drug -0.0633 0.0490 -1.29 0.1968
+## </code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true"></a>lm8 =<span class="st"> </span><span class="kw">ols</span>(total_incidentslog1p <span class="op">~</span><span class="st"> </span>percentlowgradeslog1p <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p <span class="op">+</span><span class="st"> </span>school_size <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>crime_live_recode <span class="op">+</span><span class="st"> </span>crime_area_recode <span class="op">+</span><span class="st"> </span>school_type <span class="op">+</span><span class="st">  </span>random_sweep <span class="op">+</span><span class="st"> </span>prohibit_phone <span class="op">+</span><span class="st"> </span>open_house <span class="op">+</span><span class="st"> </span>parent_teacher_conf <span class="op">+</span><span class="st"> </span>juvhelp_drug <span class="op">+</span><span class="st"> </span>mhhelp_drug <span class="op">+</span><span class="st"> </span>relighelp_drug <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p<span class="op">*</span>juvhelp_drug <span class="op">+</span><span class="st"> </span>percentlowgradeslog1p<span class="op">*</span>mhhelp_drug <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p<span class="op">*</span>random_sweep <span class="op">+</span><span class="st"> </span>percentlowgradeslog1p<span class="op">*</span>random_sweep <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p<span class="op">*</span>prohibit_phone <span class="op">+</span><span class="st"> </span>percentlowgradeslog1p<span class="op">*</span>prohibit_phone, <span class="dt">data =</span> sub, <span class="dt">x =</span> T, <span class="dt">y =</span> T)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true"></a></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true"></a>lm8<span class="fl">.1</span> =<span class="st"> </span><span class="kw">robcov</span>(lm8)</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true"></a></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true"></a><span class="kw">print</span>(lm8<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## Linear Regression Model
+##
+##  ols(formula = total_incidentslog1p ~ percentlowgradeslog1p +
+##      percentacadnotimptlog1p + school_size + urban + crime_live_recode +
+##      crime_area_recode + school_type + random_sweep + prohibit_phone +
+##      open_house + parent_teacher_conf + juvhelp_drug + mhhelp_drug +
+##      relighelp_drug + percentacadnotimptlog1p * juvhelp_drug +
+##      percentlowgradeslog1p * mhhelp_drug + percentacadnotimptlog1p *
+##      random_sweep + percentlowgradeslog1p * random_sweep + percentacadnotimptlog1p *
+##      prohibit_phone + percentlowgradeslog1p * prohibit_phone,
+##      data = sub, x = T, y = T)
+##
+##                   Model Likelihood    Discrimination
+##                         Ratio Test           Indexes
+##  Obs    2762    LR chi2    1489.39    R2       0.417
+##  sigma1.0424    d.f.            21    R2 adj   0.412
+##  d.f.   2740    Pr(&gt; chi2)  0.0000    g        0.997
+##
+##  Residuals
+##
+##       Min       1Q   Median       3Q      Max
+##  -3.86229 -0.63181  0.07946  0.68530  4.02976
+##
+##
+##                                           Coef    S.E.   t     Pr(&gt;|t|)
+##  Intercept                                -0.9142 0.2126 -4.30 &lt;0.0001
+##  percentlowgradeslog1p                     0.2977 0.0548  5.43 &lt;0.0001
+##  percentacadnotimptlog1p                   0.1569 0.0465  3.38 0.0007
+##  school_size                               0.5232 0.0235 22.28 &lt;0.0001
+##  urban                                     0.0752 0.0486  1.55 0.1224
+##  crime_live_recode                         0.2466 0.0438  5.63 &lt;0.0001
+##  crime_area_recode                         0.0531 0.0503  1.06 0.2911
+##  school_type=High                          0.7585 0.0744 10.19 &lt;0.0001
+##  school_type=Middle_Combined               0.7014 0.0636 11.02 &lt;0.0001
+##  random_sweep                              0.4004 0.1561  2.56 0.0104
+##  prohibit_phone                           -0.1754 0.1467 -1.20 0.2320
+##  open_house                               -0.1092 0.0252 -4.34 &lt;0.0001
+##  parent_teacher_conf                      -0.0359 0.0197 -1.83 0.0680
+##  juvhelp_drug                              0.4892 0.1338  3.66 0.0003
+##  mhhelp_drug                               0.4380 0.1204  3.64 0.0003
+##  relighelp_drug                            0.1290 0.0433  2.98 0.0029
+##  percentacadnotimptlog1p * juvhelp_drug   -0.1046 0.0412 -2.54 0.0112
+##  percentlowgradeslog1p * mhhelp_drug      -0.1240 0.0460 -2.70 0.0070
+##  percentacadnotimptlog1p * random_sweep   -0.0147 0.0457 -0.32 0.7470
+##  percentlowgradeslog1p * random_sweep     -0.0993 0.0456 -2.18 0.0296
+##  percentacadnotimptlog1p * prohibit_phone  0.0684 0.0456  1.50 0.1339
+##  percentlowgradeslog1p * prohibit_phone   -0.0562 0.0470 -1.20 0.2321
+## </code></pre>
+</section>
+<section id="final-model" class="level2">
+<h2>Final Model</h2>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true"></a>lmfinal =<span class="st"> </span><span class="kw">ols</span>(total_incidentslog1p <span class="op">~</span><span class="st"> </span>percentlowgradeslog1p <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p <span class="op">+</span><span class="st"> </span>school_size <span class="op">+</span><span class="st"> </span>urban <span class="op">+</span><span class="st"> </span>crime_live_recode <span class="op">+</span><span class="st"> </span>crime_area_recode <span class="op">+</span><span class="st"> </span>school_type <span class="op">+</span><span class="st">  </span>random_sweep <span class="op">+</span><span class="st"> </span>prohibit_phone <span class="op">+</span><span class="st"> </span>open_house <span class="op">+</span><span class="st"> </span>parent_teacher_conf <span class="op">+</span><span class="st"> </span>juvhelp_drug <span class="op">+</span><span class="st"> </span>mhhelp_drug <span class="op">+</span><span class="st"> </span>relighelp_drug <span class="op">+</span><span class="st"> </span>percentacadnotimptlog1p<span class="op">*</span>juvhelp_drug <span class="op">+</span><span class="st"> </span>percentlowgradeslog1p<span class="op">*</span>mhhelp_drug <span class="op">+</span><span class="st"> </span>percentlowgradeslog1p<span class="op">*</span>random_sweep, <span class="dt">data =</span> sub, <span class="dt">x =</span> T, <span class="dt">y =</span> T)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true"></a></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true"></a><span class="kw">print</span>(lmfinal)</span></code></pre></div>
+<pre><code>## Linear Regression Model
+##
+##  ols(formula = total_incidentslog1p ~ percentlowgradeslog1p +
+##      percentacadnotimptlog1p + school_size + urban + crime_live_recode +
+##      crime_area_recode + school_type + random_sweep + prohibit_phone +
+##      open_house + parent_teacher_conf + juvhelp_drug + mhhelp_drug +
+##      relighelp_drug + percentacadnotimptlog1p * juvhelp_drug +
+##      percentlowgradeslog1p * mhhelp_drug + percentlowgradeslog1p *
+##      random_sweep, data = sub, x = T, y = T)
+##
+##                   Model Likelihood    Discrimination
+##                         Ratio Test           Indexes
+##  Obs    2762    LR chi2    1486.08    R2       0.416
+##  sigma1.0425    d.f.            18    R2 adj   0.412
+##  d.f.   2743    Pr(&gt; chi2)  0.0000    g        0.996
+##
+##  Residuals
+##
+##       Min       1Q   Median       3Q      Max
+##  -3.86543 -0.63001  0.07528  0.68594  4.01773
+##
+##
+##                                         Coef    S.E.   t     Pr(&gt;|t|)
+##  Intercept                              -0.9508 0.1805 -5.27 &lt;0.0001
+##  percentlowgradeslog1p                   0.2594 0.0384  6.76 &lt;0.0001
+##  percentacadnotimptlog1p                 0.1980 0.0260  7.61 &lt;0.0001
+##  school_size                             0.5237 0.0236 22.20 &lt;0.0001
+##  urban                                   0.0765 0.0522  1.47 0.1427
+##  crime_live_recode                       0.2479 0.0444  5.59 &lt;0.0001
+##  crime_area_recode                       0.0538 0.0490  1.10 0.2726
+##  school_type=High                        0.7589 0.0688 11.04 &lt;0.0001
+##  school_type=Middle_Combined             0.7030 0.0568 12.38 &lt;0.0001
+##  random_sweep                            0.3685 0.1178  3.13 0.0018
+##  prohibit_phone                         -0.1120 0.0431 -2.60 0.0094
+##  open_house                             -0.1089 0.0263 -4.15 &lt;0.0001
+##  parent_teacher_conf                    -0.0357 0.0209 -1.70 0.0883
+##  juvhelp_drug                            0.5014 0.1312  3.82 0.0001
+##  mhhelp_drug                             0.4326 0.1191  3.63 0.0003
+##  relighelp_drug                          0.1304 0.0447  2.92 0.0035
+##  percentacadnotimptlog1p * juvhelp_drug -0.1087 0.0402 -2.71 0.0068
+##  percentlowgradeslog1p * mhhelp_drug    -0.1215 0.0439 -2.77 0.0057
+##  percentlowgradeslog1p * random_sweep   -0.1047 0.0424 -2.47 0.0135
+## </code></pre>
+<p>Our main theoretical variable of interests, the socio-economic variables, remain statistically significant, net of all other variables considered. We can also discuss the other variables in this model, at length, for the value of other contributory explanatory factors for school safety.</p>
+<p>Now let us look at the preliminary results for what a Machine Learning approach can do for us.</p>
+</section>
+</section>
+</div>
+<div id="notebook" class="border-box-sizing" tabindex="-1">
+<div id="notebook-container" class="container">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<section id="Study-2a-Initial-Results" class="text_cell_render border-box-sizing rendered_html">
+<h1>Study 2a Initial Results<a href="#Study-2a-Initial-Results" class="anchor-link">¶</a></h1>
+</section>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Statistical Computing is done in Python for this section. In this section, I build a Random Forest Regressor to consider variables that I found were important to consider for school safety, within the literature. These are the same set of Variables found in Study 1. I am interested specifically in the permutation importance scores arising from nonlinear machine learning models, and how it might be a valuable companion or alternative to linear regressions, in the case of high-dimensional datasets that cause problems for linear regressions under the Gauss-Markow assumptions.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split, RandomizedSearchCV, GridSearchCV
+from sklearn.inspection import permutation_importance
+from sklearn.ensemble import RandomForestRegressor
+
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
+from sklearn.metrics import mean_absolute_error
+import pandas as pd
+from math import sqrt</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>df = pd.read_csv(&#39;/Users/kagenlim/Documents/GitHub/MA-Thesis/preprocessedstudy1.csv&#39;)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>df.head()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">
+Out[ ]:
+</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table class="dataframe" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>total_incidentslog1p</th>
+<th>percentlowgradeslog1p</th>
+<th>percentacadnotimptlog1p</th>
+<th>school_size</th>
+<th>urban</th>
+<th>crime_live_recode</th>
+<th>crime_area_recode</th>
+<th>school_type</th>
+<th>visitor_badge</th>
+<th>control_building</th>
+<th>...</th>
+<th>privatehelp_drug</th>
+<th>relighelp_drug</th>
+<th>prevention_curriculum</th>
+<th>sel</th>
+<th>behav_mod</th>
+<th>mentoring</th>
+<th>peer_mediation</th>
+<th>student_court</th>
+<th>restorative_circles</th>
+<th>promote_community</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>2.397895</td>
+<td>2.772589</td>
+<td>3.433987</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Middle_Combined</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>2.833213</td>
+<td>1.791759</td>
+<td>4.394449</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>Middle_Combined</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>2.564949</td>
+<td>1.791759</td>
+<td>1.791759</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Middle_Combined</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>3.258097</td>
+<td>2.397895</td>
+<td>2.772589</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>High</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>1.098612</td>
+<td>1.386294</td>
+<td>1.098612</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Middle_Combined</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 49 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>le = LabelEncoder()
+df.school_type = le.fit_transform(df.school_type)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>df.head()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">
+Out[ ]:
+</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table class="dataframe" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>total_incidentslog1p</th>
+<th>percentlowgradeslog1p</th>
+<th>percentacadnotimptlog1p</th>
+<th>school_size</th>
+<th>urban</th>
+<th>crime_live_recode</th>
+<th>crime_area_recode</th>
+<th>school_type</th>
+<th>visitor_badge</th>
+<th>control_building</th>
+<th>...</th>
+<th>privatehelp_drug</th>
+<th>relighelp_drug</th>
+<th>prevention_curriculum</th>
+<th>sel</th>
+<th>behav_mod</th>
+<th>mentoring</th>
+<th>peer_mediation</th>
+<th>student_court</th>
+<th>restorative_circles</th>
+<th>promote_community</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>2.397895</td>
+<td>2.772589</td>
+<td>3.433987</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>2.833213</td>
+<td>1.791759</td>
+<td>4.394449</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>2.564949</td>
+<td>1.791759</td>
+<td>1.791759</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>3.258097</td>
+<td>2.397895</td>
+<td>2.772589</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>1.098612</td>
+<td>1.386294</td>
+<td>1.098612</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 49 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<section id="Hyperparamter-Tuning-for-Random-Forest-Model-and-Evaluation" class="text_cell_render border-box-sizing rendered_html">
+<h2>Hyperparamter Tuning for Random Forest Model and Evaluation<a href="#Hyperparamter-Tuning-for-Random-Forest-Model-and-Evaluation" class="anchor-link">¶</a></h2>
+</section>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>y = df.total_incidentslog1p
+
+X = df.iloc[:, 1:49]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>X_train, X_test, y_train, y_test = train_test_split(X, y,test_size = 0.2, random_state=42)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code># Number of trees in random forest
+n_estimators = [int(x) for x in np.linspace(start = 200, stop = 2000, num = 10)]
+# Maximum number of levels in tree
+max_depth = [int(x) for x in np.linspace(10, 110, num = 11)]
+max_depth.append(None)
+# Minimum number of samples required to split a node
+min_samples_split = [2, 5, 10]
+# Minimum number of samples required at each leaf node
+min_samples_leaf = [1, 2, 4]
+# Method of selecting samples for training each tree
+bootstrap = [True, False]
+# Create the random grid
+random_grid = {&#39;n_estimators&#39;: n_estimators,
+               &#39;max_depth&#39;: max_depth,
+               &#39;min_samples_split&#39;: min_samples_split,
+               &#39;min_samples_leaf&#39;: min_samples_leaf,
+               &#39;bootstrap&#39;: bootstrap}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code># Use the random grid to search for best hyperparameters
+# First create the base model to tune
+rf = RandomForestRegressor(max_features = &#39;sqrt&#39;, random_state=42)
+# Random search of parameters, using 3 fold cross validation,
+# search across 100 different combinations, and use all available cores
+rf_random = RandomizedSearchCV(estimator = rf, param_distributions = random_grid, n_iter = 100, cv = 5, verbose=2, random_state=42)
+# Fit the random search model
+rf_random.fit(X_train, y_train)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>rf_random.best_params_</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">
+Out[ ]:
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><code>{&#39;n_estimators&#39;: 800,
+ &#39;min_samples_split&#39;: 2,
+ &#39;min_samples_leaf&#39;: 2,
+ &#39;max_depth&#39;: 30,
+ &#39;bootstrap&#39;: False}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>param_gridcv = {
+    &#39;bootstrap&#39;: [False],
+    &#39;max_depth&#39;: [30, 40, 50],
+    &#39;min_samples_leaf&#39;: [2, 3, 4],
+    &#39;min_samples_split&#39;: [2, 3, 4],
+    &#39;n_estimators&#39;: [700, 800, 900, 1000]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>rf = RandomForestRegressor(max_features = &#39;sqrt&#39;, random_state=42) #same as above#
+
+grid = GridSearchCV(estimator = rf, param_grid = param_gridcv,
+                          cv = 5, verbose = 2)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>grid.fit(X_train, y_train)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>grid.best_params_</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">
+Out[ ]:
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><code>{&#39;bootstrap&#39;: False,
+ &#39;max_depth&#39;: 30,
+ &#39;min_samples_leaf&#39;: 2,
+ &#39;min_samples_split&#39;: 2,
+ &#39;n_estimators&#39;: 800}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>print(&quot;RF train R_squared: %0.3f&quot; % grid.best_score_)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt">
+
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><code>RF train R_squared: 0.388</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>print(&quot;RF test R_squared: %0.3f&quot; % grid.score(X_test, y_test))</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt">
+
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><code>RF test R_squared: 0.398</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>def model_eval_metrics(y_true, y_pred,classification=&quot;TRUE&quot;):
+     if classification==&quot;TRUE&quot;:
+        accuracy_eval = accuracy_score(y_true, y_pred)
+        f1_score_eval = f1_score(y_true, y_pred,average=&quot;macro&quot;,zero_division=0)
+        precision_eval = precision_score(y_true, y_pred,average=&quot;macro&quot;,zero_division=0)
+        recall_eval = recall_score(y_true, y_pred,average=&quot;macro&quot;,zero_division=0)
+        mse_eval = 0
+        rmse_eval = 0
+        mae_eval = 0
+        r2_eval = 0
+        metricdata = {&#39;accuracy&#39;: [accuracy_eval], &#39;f1_score&#39;: [f1_score_eval], &#39;precision&#39;: [precision_eval], &#39;recall&#39;: [recall_eval], &#39;mse&#39;: [mse_eval], &#39;rmse&#39;: [rmse_eval], &#39;mae&#39;: [mae_eval], &#39;r2&#39;: [r2_eval]}
+        finalmetricdata = pd.DataFrame.from_dict(metricdata)
+     else:
+        accuracy_eval = 0
+        f1_score_eval = 0
+        precision_eval = 0
+        recall_eval = 0
+        mse_eval = mean_squared_error(y_true, y_pred)
+        rmse_eval = sqrt(mean_squared_error(y_true, y_pred))
+        mae_eval = mean_absolute_error(y_true, y_pred)
+        r2_eval = r2_score(y_true, y_pred)
+        metricdata = {&#39;accuracy&#39;: [accuracy_eval], &#39;f1_score&#39;: [f1_score_eval], &#39;precision&#39;: [precision_eval], &#39;recall&#39;: [recall_eval], &#39;mse&#39;: [mse_eval], &#39;rmse&#39;: [rmse_eval], &#39;mae&#39;: [mae_eval], &#39;r2&#39;: [r2_eval]}
+        finalmetricdata = pd.DataFrame.from_dict(metricdata)
+     return finalmetricdata</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>final_rf = RandomForestRegressor(bootstrap = False,
+ max_depth = 30,
+ min_samples_leaf = 2,
+ min_samples_split = 2,
+ n_estimators = 800, max_features = &#39;sqrt&#39;, random_state=42)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>final_rf.fit(X_train, y_train)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">
+Out[ ]:
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><code>RandomForestRegressor(bootstrap=False, max_depth=30, max_features=&#39;sqrt&#39;,
+                      min_samples_leaf=2, n_estimators=800, random_state=42)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>y_pred = final_rf.predict(X_test)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>model_eval_metrics(y_test, y_pred, classification = False)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">
+Out[ ]:
+</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table class="dataframe" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>accuracy</th>
+<th>f1_score</th>
+<th>precision</th>
+<th>recall</th>
+<th>mse</th>
+<th>rmse</th>
+<th>mae</th>
+<th>r2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1.086113</td>
+<td>1.042167</td>
+<td>0.818344</td>
+<td>0.398287</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<section id="Vs-Base-Model-(For-Comparison)" class="text_cell_render border-box-sizing rendered_html">
+<h3>Vs Base Model (For Comparison)<a href="#Vs-Base-Model-(For-Comparison)" class="anchor-link">¶</a></h3>
+</section>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>base_rf = RandomForestRegressor(random_state=42)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>base_rf.fit(X_train, y_train)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">
+Out[ ]:
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><code>RandomForestRegressor(random_state=42)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>y_pred_base = base_rf.predict(X_test)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>model_eval_metrics(y_test, y_pred_base, classification = False)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">
+Out[ ]:
+</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table class="dataframe" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>accuracy</th>
+<th>f1_score</th>
+<th>precision</th>
+<th>recall</th>
+<th>mse</th>
+<th>rmse</th>
+<th>mae</th>
+<th>r2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1.116146</td>
+<td>1.056478</td>
+<td>0.824189</td>
+<td>0.381648</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Indeed RMSE has fallen, and r^2 is slightly better for <code>final_rf</code>, relative to the untuned <code>base_rf</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<section id="Permutation-Importance-without-Clustering" class="text_cell_render border-box-sizing rendered_html">
+<h2>Permutation Importance<a href="#Permutation-Importance-without-Clustering" class="anchor-link">¶</a></h2>
+</section>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Why permutation importances and not feature importances? Because impurity-based feature importances are subject to cardinality of features, and favour high cardinality features (e.g., numerical features with large scales). Feature importances are also usually calculated only on a single set of data, and cannot be evaluated on a held-out validation set, to check for the generalisability of these permutation importances.</p>
+<p>Permutation-based importances overcome these issues.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>How to Interpet</strong>: The values here are the change in R^2 or RMSE for a given model, should this feature be randomly permuted.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<section id="On-Training-Set" class="text_cell_render border-box-sizing rendered_html">
+<h3>On Training Set<a href="#On-Training-Set" class="anchor-link">¶</a></h3>
+</section>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<section id="R-Squared" class="text_cell_render border-box-sizing rendered_html">
+<h4>R-Squared<a href="#R-Squared" class="anchor-link">¶</a></h4>
+</section>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>from sklearn.inspection import permutation_importance
+r1 = permutation_importance(final_rf, X_train, y_train, n_repeats=30,random_state=42)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>for i in r1.importances_mean.argsort()[::-1]:
+    if r1.importances_mean[i] - 2 * r1.importances_std[i] &gt; 0:
+        print(f&quot;{X_train.columns.values[i]:&lt;8}&quot; &quot; &quot;
+              f&quot;{r1.importances_mean[i]:.3f}&quot;
+              f&quot; +/- {r1.importances_std[i]:.3f}&quot;)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt">
+
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><code>school_size 0.274 +/- 0.007
+school_type 0.187 +/- 0.006
+open_house 0.125 +/- 0.003
+percentacadnotimptlog1p 0.111 +/- 0.003
+crime_live_recode 0.100 +/- 0.003
+parent_teacher_conf 0.097 +/- 0.003
+percentlowgradeslog1p 0.090 +/- 0.002
+juvhelp_drug 0.075 +/- 0.003
+random_sweep 0.064 +/- 0.003
+crime_area_recode 0.058 +/- 0.003
+anonymous_report 0.057 +/- 0.003
+mhhelp_drug 0.047 +/- 0.002
+school_lockers 0.042 +/- 0.002
+prohibit_phone 0.039 +/- 0.002
+dress_code 0.037 +/- 0.001
+socialshelp_drug 0.032 +/- 0.001
+urban    0.030 +/- 0.001
+control_ground 0.026 +/- 0.001
+relighelp_drug 0.026 +/- 0.001
+civichelp_drug 0.023 +/- 0.001
+close_lunch 0.023 +/- 0.001
+student_id 0.022 +/- 0.001
+restorative_circles 0.021 +/- 0.001
+disciplinary_process 0.021 +/- 0.001
+staff_id 0.021 +/- 0.001
+privatehelp_drug 0.021 +/- 0.001
+parent_training_assist 0.020 +/- 0.001
+lock_inside 0.020 +/- 0.001
+emergency_notif 0.019 +/- 0.001
+peer_mediation 0.019 +/- 0.001
+parenthelp_drug 0.018 +/- 0.001
+panic_button 0.018 +/- 0.001
+radio    0.018 +/- 0.001
+lawhelp_drug 0.017 +/- 0.001
+wear_uniform 0.015 +/- 0.001
+security_camera 0.013 +/- 0.001
+promote_community 0.010 +/- 0.000
+drug_testing 0.008 +/- 0.000
+student_court 0.008 +/- 0.000
+sel      0.007 +/- 0.000
+random_check 0.005 +/- 0.000
+mentoring 0.005 +/- 0.000
+visitor_badge 0.003 +/- 0.000
+prevention_curriculum 0.003 +/- 0.000
+control_building 0.003 +/- 0.000
+behav_mod 0.003 +/- 0.000
+book_bags 0.002 +/- 0.000
+require_check 0.002 +/- 0.000</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<section id="RMSE" class="text_cell_render border-box-sizing rendered_html">
+<h4>RMSE<a href="#RMSE" class="anchor-link">¶</a></h4>
+</section>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>from sklearn.inspection import permutation_importance
+r1_1 = permutation_importance(final_rf, X_train, y_train, scoring = &#39;neg_root_mean_squared_error&#39;, n_repeats=30,random_state=42)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>for i in r1_1.importances_mean.argsort()[::-1]:
+    if r1_1.importances_mean[i] - 2 * r1_1.importances_std[i] &gt; 0:
+        print(f&quot;{X_train.columns.values[i]:&lt;8}&quot; &quot; &quot;
+              f&quot;{r1_1.importances_mean[i]:.3f}&quot;
+              f&quot; +/- {r1_1.importances_std[i]:.3f}&quot;)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt">
+
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><code>school_size 0.414 +/- 0.008
+school_type 0.309 +/- 0.008
+open_house 0.224 +/- 0.004
+percentacadnotimptlog1p 0.203 +/- 0.004
+crime_live_recode 0.186 +/- 0.005
+parent_teacher_conf 0.181 +/- 0.005
+percentlowgradeslog1p 0.170 +/- 0.004
+juvhelp_drug 0.146 +/- 0.004
+random_sweep 0.127 +/- 0.004
+crime_area_recode 0.116 +/- 0.005
+anonymous_report 0.114 +/- 0.005
+mhhelp_drug 0.095 +/- 0.003
+school_lockers 0.087 +/- 0.003
+prohibit_phone 0.082 +/- 0.003
+dress_code 0.077 +/- 0.003
+socialshelp_drug 0.068 +/- 0.003
+urban    0.065 +/- 0.002
+control_ground 0.056 +/- 0.002
+relighelp_drug 0.055 +/- 0.002
+civichelp_drug 0.050 +/- 0.002
+close_lunch 0.049 +/- 0.002
+student_id 0.048 +/- 0.002
+restorative_circles 0.046 +/- 0.002
+disciplinary_process 0.045 +/- 0.002
+staff_id 0.045 +/- 0.002
+privatehelp_drug 0.045 +/- 0.002
+parent_training_assist 0.043 +/- 0.002
+lock_inside 0.043 +/- 0.002
+emergency_notif 0.042 +/- 0.002
+peer_mediation 0.041 +/- 0.002
+parenthelp_drug 0.040 +/- 0.001
+panic_button 0.040 +/- 0.001
+radio    0.039 +/- 0.001
+lawhelp_drug 0.036 +/- 0.001
+wear_uniform 0.032 +/- 0.002
+security_camera 0.029 +/- 0.001
+promote_community 0.022 +/- 0.001
+drug_testing 0.017 +/- 0.001
+student_court 0.017 +/- 0.001
+sel      0.015 +/- 0.001
+random_check 0.012 +/- 0.001
+mentoring 0.010 +/- 0.001
+visitor_badge 0.007 +/- 0.001
+prevention_curriculum 0.007 +/- 0.000
+control_building 0.006 +/- 0.000
+behav_mod 0.006 +/- 0.000
+book_bags 0.005 +/- 0.000
+require_check 0.004 +/- 0.000</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<section id="On-Test-Set" class="text_cell_render border-box-sizing rendered_html">
+<h3>On Test Set<a href="#On-Test-Set" class="anchor-link">¶</a></h3>
+</section>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<section id="R-Squared" class="text_cell_render border-box-sizing rendered_html">
+<h4>R-Squared<a href="#R-Squared" class="anchor-link">¶</a></h4>
+</section>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>from sklearn.inspection import permutation_importance
+r2 = permutation_importance(final_rf, X_test, y_test, n_repeats=30,random_state=42)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>X_test</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">
+Out[ ]:
+</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table class="dataframe" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>percentlowgradeslog1p</th>
+<th>percentacadnotimptlog1p</th>
+<th>school_size</th>
+<th>urban</th>
+<th>crime_live_recode</th>
+<th>crime_area_recode</th>
+<th>school_type</th>
+<th>visitor_badge</th>
+<th>control_building</th>
+<th>control_ground</th>
+<th>...</th>
+<th>privatehelp_drug</th>
+<th>relighelp_drug</th>
+<th>prevention_curriculum</th>
+<th>sel</th>
+<th>behav_mod</th>
+<th>mentoring</th>
+<th>peer_mediation</th>
+<th>student_court</th>
+<th>restorative_circles</th>
+<th>promote_community</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>367</td>
+<td>1.791759</td>
+<td>1.791759</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2760</td>
+<td>2.397895</td>
+<td>2.397895</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>1330</td>
+<td>2.397895</td>
+<td>3.433987</td>
+<td>3</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2136</td>
+<td>4.394449</td>
+<td>0.000000</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>521</td>
+<td>2.397895</td>
+<td>3.044522</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td>315</td>
+<td>2.397895</td>
+<td>2.397895</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>1724</td>
+<td>2.772589</td>
+<td>3.258097</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>...</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>764</td>
+<td>2.772589</td>
+<td>4.330733</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1684</td>
+<td>2.397895</td>
+<td>2.772589</td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>2323</td>
+<td>0.000000</td>
+<td>3.433987</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>553 rows × 48 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>for i in r2.importances_mean.argsort()[::-1]:
+    if r2.importances_mean[i] - 2 * r2.importances_std[i] &gt; 0:
+        print(f&quot;{X_test.columns.values[i]:&lt;8}&quot; &quot; &quot;
+              f&quot;{r2.importances_mean[i]:.3f}&quot;
+              f&quot; +/- {r2.importances_std[i]:.3f}&quot;)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt">
+
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><code>school_size 0.177 +/- 0.015
+school_type 0.092 +/- 0.011
+open_house 0.021 +/- 0.006
+percentlowgradeslog1p 0.017 +/- 0.003
+percentacadnotimptlog1p 0.015 +/- 0.006
+parent_teacher_conf 0.014 +/- 0.005
+random_sweep 0.010 +/- 0.003
+school_lockers 0.006 +/- 0.002
+staff_id 0.003 +/- 0.001</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<section id="RMSE" class="text_cell_render border-box-sizing rendered_html">
+<h4>RMSE<a href="#RMSE" class="anchor-link">¶</a></h4>
+</section>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>from sklearn.inspection import permutation_importance
+r2_1 = permutation_importance(final_rf, X_test, y_test, scoring = &#39;neg_root_mean_squared_error&#39;, n_repeats=30,random_state=42)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [ ]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3">
+<pre><code>for i in r2_1.importances_mean.argsort()[::-1]:
+    if r2_1.importances_mean[i] - 2 * r2_1.importances_std[i] &gt; 0:
+        print(f&quot;{X_test.columns.values[i]:&lt;8}&quot; &quot; &quot;
+              f&quot;{r2_1.importances_mean[i]:.3f}&quot;
+              f&quot; +/- {r2_1.importances_std[i]:.3f}&quot;)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt">
+
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><code>school_size 0.143 +/- 0.012
+school_type 0.077 +/- 0.009
+open_house 0.018 +/- 0.005
+percentlowgradeslog1p 0.014 +/- 0.003
+percentacadnotimptlog1p 0.013 +/- 0.005
+parent_teacher_conf 0.012 +/- 0.004
+random_sweep 0.008 +/- 0.003
+school_lockers 0.005 +/- 0.002
+staff_id 0.002 +/- 0.001</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are some notable convergences between the important variables identified in through Regression Modelling, and the variables uncovered as permutation importance in Machine Learning Modelling.</p>
+<p>The variables I included as proxies for SES, <code>percentlowgradeslog1p</code> and <code>percentacadnotimptlog1p</code> were surfaced as important throughout the machine learning models I tried, on training or test data. So were some key security features like <code>random_sweep</code> and parental involvement features like <code>parent_teacher_conf</code>.</p>
+<p>The machine learning approach for analyzing data, importantly, adds value to how social scientists have traditionally used datasets , through the Machine Learning Modelling process, we can consider far more variables than we could compared to Regression Modelling, which had to be theoretically driven; models in that segment had to be built hierarchically.</p>
+<p>Further, for the Machine Modelling section, Study 2a, the <code>train_test_split</code> approach in Machine Learning allowed for two ways to assess the importance of a feature -- both on the training set (which tells us some information about the structure of the data) and on the test set (which tells us crucial information on how this Random Forest Model has learned from the training set, and what features might remain important when the Random Forest model is generalized to an unseen data set).</p>
+<p>I expect to have even more to discuss, and for this methodological approach to be even more interesting, when I consider more variables in the Study 2b part of this analysis. This is a methodological approach to consider for social scientists, and I intend to further discuss how so in the discussion section of the thesis.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>References</strong></p>
+<p>Adadi, A., &amp; Berrada, M. (2018). Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI). IEEE Access, 6, 52138–52160. <a href="https://doi.org/10.1109/ACCESS.2018.2870052">https://doi.org/10.1109/ACCESS.2018.2870052</a></p>
+<p>Breiman, L. (2001). Random Forests. Machine Learning, 45(1), 5–32. <a href="https://doi.org/10.1023/A:1010933404324">https://doi.org/10.1023/A:1010933404324</a></p>
+<p>Breiman, L. (2001). Statistical Modeling: The Two Cultures. Statistical Science, 16(3), 199–231. <a href="https://doi.org/10.1214/ss/1009213726">https://doi.org/10.1214/ss/1009213726</a></p>
+<p>Cloward, R. A., &amp; Ohlin, L. E. (1960). Delinquency and Opportunity: A theory of delinquent gangs. Free Press.</p>
+<p>U. S. Department of Education (n.d.). School Survey on Crime and Safety (SSOCS) — Overview. Retrieved February 03, 2021, from <a href="https://nces.ed.gov/surveys/ssocs">https://nces.ed.gov/surveys/ssocs</a></p>
+<p>Yoo, W., Mayberry, R., Bae, S., Singh, K., Peter He, Q., &amp; Lillard, J. W., Jr (2014). A Study of Effects of MultiCollinearity in the Multivariable Analysis. International Journal of Applied Science and Technology, 4(5), 9–19.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
