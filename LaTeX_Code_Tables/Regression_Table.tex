@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+\usepackage{amsmath, amsfonts,adjustbox}
+
+\author{John Doe}
+\title{Regression Table}
+
+% these are compressed lists to help fit into a 1 page limit
+\newenvironment{enumerate*}%
+  {\vspace{-2ex} \begin{enumerate} %
+     \setlength{\itemsep}{-1ex} \setlength{\parsep}{0pt}}%
+  {\end{enumerate}}
+ 
+\newenvironment{itemize*}%
+  {\vspace{-2ex} \begin{itemize} %
+     \setlength{\itemsep}{-1ex} \setlength{\parsep}{0pt}}%
+  {\end{itemize}}
+ 
+\newenvironment{description*}%
+  {\vspace{-2ex} \begin{description} %
+     \setlength{\itemsep}{-1ex} \setlength{\parsep}{0pt}}%
+  {\end{description}}
+
+\begin{document}
+\setcounter{table}{6}
+
+\begin{table}[!htbp] \centering 
+\begin{adjustbox}{width=1\textwidth}
+\small
+\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{total\_incidents} \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ percentlowgrades & 0.192$^{***}$ & 0.158$^{***}$ & 0.155$^{***}$ \\ 
+  & (0.024) & (0.023) & (0.023) \\ 
+  & & & \\ 
+ percentacadnotimpt & 0.253$^{***}$ & 0.194$^{***}$ & 0.189$^{***}$ \\ 
+  & (0.022) & (0.021) & (0.021) \\ 
+  & & & \\ 
+ school\_size & 0.686$^{***}$ & 0.540$^{***}$ & 0.537$^{***}$ \\ 
+  & (0.023) & (0.024) & (0.024) \\ 
+  & & & \\ 
+ urban &  & 0.039 & 0.060 \\ 
+  &  & (0.053) & (0.053) \\ 
+  & & & \\ 
+ crimes\_school\_area &  & 0.071 & 0.079 \\ 
+  &  & (0.050) & (0.050) \\ 
+  & & & \\ 
+ crimes\_students\_residence &  & 0.258$^{***}$ & 0.258$^{***}$ \\ 
+  &  & (0.045) & (0.045) \\ 
+  & & & \\ 
+ school\_type=High\_School &  & 1.086$^{***}$ & 1.010$^{***}$ \\ 
+  &  & (0.057) & (0.063) \\ 
+  & & & \\ 
+ school\_type=Middle\_Combined\_School &  & 0.858$^{***}$ & 0.802$^{***}$ \\ 
+  &  & (0.053) & (0.056) \\ 
+  & & & \\ 
+ random\_sweep &  &  & 0.136$^{***}$ \\ 
+  &  &  & (0.046) \\ 
+  & & & \\ 
+ parenthelp\_drug &  &  & $-$0.033 \\ 
+  &  &  & (0.044) \\ 
+  & & & \\ 
+ sel &  &  & 0.014 \\ 
+  &  &  & (0.059) \\ 
+  & & & \\ 
+ Constant & $-$0.620$^{***}$ & $-$1.181$^{***}$ & $-$1.177$^{***}$ \\ 
+  & (0.106) & (0.108) & (0.122) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 2,762 & 2,762 & 2,762 \\ 
+R$^{2}$ & 0.285 & 0.390 & 0.392 \\ 
+Adjusted R$^{2}$ & 0.284 & 0.388 & 0.390 \\ 
+Residual Std. Error & 1.150 (df = 2758) & 1.064 (df = 2753) & 1.062 (df = 2750) \\ 
+F Statistic & 366.871$^{***}$ (df = 3; 2758) & 220.076$^{***}$ (df = 8; 2753) & 161.243$^{***}$ (df = 11; 2750) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{adjustbox}
+\caption{Regression Output for Illustrative Example}
+\end{table} 
+
+\end{document}

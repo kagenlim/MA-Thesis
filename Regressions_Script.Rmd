@@ -1,5 +1,5 @@
 ---
-title: "Regressions for Thesis"
+title: "Regressions for MA Thesis"
 output: html_document
 ---
 ```{r setup, include=FALSE}
@@ -11,78 +11,31 @@ load("my_work_space.RData")
 ```
 
 ```{r full Data}
-sub = read.csv('preprocessedstudy1.csv')
+sub = read.csv('preprocessed_data.csv')
 
 colnames(sub)
 
-glimpse(sub)
+tibble::glimpse(sub)
 ```
 
 ### Base Model
+
 ```{r Preliminary Models}
-lm1 = lm(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_area_recode + crime_live_recode + as.factor(school_type), sub)
-
-summary(lm1)
-library(lmtest)
-resettest(lm1, power = 3)
-bptest(lm1)
-
-library(rms)
-
 sub$school_type <- factor(sub$school_type)
 
-lm1.1 = ols(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_live_recode + crime_area_recode, data = sub, x = T, y = T)
+lm1 = lm(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size, sub)
+summary(lm1)
 
-lm1.2 = robcov(lm1.1)
+lm2 = lm(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_area_recode + crime_live_recode + school_type, sub)
 
-lm2 = ols(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_live_recode + crime_area_recode + school_type + random_sweep + require_check + random_check + prohibit_phone + security_camera, data = sub, x = T, y = T)
+lm3 = lm(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_area_recode + crime_live_recode + school_type + random_sweep + parenthelp_drug + sel, sub)
 
-lm2.1 = robcov(lm2)
+anova(lm1, lm2, lm3)
 
-lrtest(lm2.1, lm1.2)
-
-lm3 = ols(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_live_recode + crime_area_recode +school_type+ random_sweep + prohibit_phone + security_camera + open_house + parent_teacher_conf + disciplinary_process + parent_training_assist + parenthelp_drug, data = sub, x = T, y = T)
-
-lm3.1 = robcov(lm3)
-
-lrtest(lm2.1, lm3.1)
-
-lm4 = ols(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_live_recode + crime_area_recode +  school_type + random_sweep + prohibit_phone + security_camera + open_house + parent_teacher_conf + socialshelp_drug + juvhelp_drug + lawhelp_drug + mhhelp_drug + civichelp_drug + privatehelp_drug + relighelp_drug, data = sub, x = T, y = T)
-
-lm4.1 = robcov(lm4)
-
-lrtest(lm4.1, lm3.1)
-
-lm5 = ols(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_live_recode + crime_area_recode +school_type +  random_sweep + prohibit_phone + open_house + parent_teacher_conf + mhhelp_drug + juvhelp_drug+ relighelp_drug + prevention_curriculum + sel + behav_mod + mentoring + peer_mediation + student_court + restorative_circles + promote_community, data = sub, x = T, y = T)
-
-lm5.1 = robcov(lm5)
-
-lrtest(lm5.1, lm4.1)
+library(lmtest)
+bptest(lm3)
 
 library(stargazer)
 
-stargazer(lm1.2, lm2.1, lm3.1, lm4.1, lm5.1, type = 'text')
+stargazer(lm1, lm2, lm3)
 ```
-
-##Feature Engineering: Interaction Terms
-
-```{r Interaction Variables}
-lm6 = ols(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_live_recode + crime_area_recode +school_type +  random_sweep + prohibit_phone + open_house + parent_teacher_conf + juvhelp_drug+ mhhelp_drug + relighelp_drug + behav_mod + percentlowgradeslog1p*open_house + percentacadnotimptlog1p*open_house + percentlowgradeslog1p*parent_teacher_conf + percentacadnotimptlog1p*parent_teacher_conf, data = sub, x = T, y = T)
-
-lm6.1 = robcov(lm6)
-
-lm7 = ols(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_live_recode + crime_area_recode +school_type +  random_sweep + prohibit_phone + open_house + parent_teacher_conf + juvhelp_drug+ mhhelp_drug + relighelp_drug + percentlowgradeslog1p*juvhelp_drug + percentacadnotimptlog1p*juvhelp_drug + percentlowgradeslog1p*mhhelp_drug + percentacadnotimptlog1p*mhhelp_drug + percentlowgradeslog1p*relighelp_drug + percentacadnotimptlog1p*relighelp_drug, data = sub, x = T, y = T)
-
-lm7.1 = robcov(lm7)
-
-lm8 = ols(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_live_recode + crime_area_recode + school_type +  random_sweep + prohibit_phone + open_house + parent_teacher_conf + juvhelp_drug + mhhelp_drug + relighelp_drug + percentacadnotimptlog1p*juvhelp_drug + percentlowgradeslog1p*mhhelp_drug + percentacadnotimptlog1p*random_sweep + percentlowgradeslog1p*random_sweep + percentacadnotimptlog1p*prohibit_phone + percentlowgradeslog1p*prohibit_phone, data = sub, x = T, y = T)
-
-lm8.1 = robcov(lm8)
-
-lmfinal = ols(total_incidentslog1p ~ percentlowgradeslog1p + percentacadnotimptlog1p + school_size + urban + crime_live_recode + crime_area_recode + school_type +  random_sweep + prohibit_phone + open_house + parent_teacher_conf + juvhelp_drug + mhhelp_drug + relighelp_drug + percentacadnotimptlog1p*juvhelp_drug + percentlowgradeslog1p*mhhelp_drug + percentlowgradeslog1p*random_sweep, data = sub, x = T, y = T)
-
-stargazer(lm6.1, lm7.1, lm8.1, lmfinal, type = 'text')
-```
-
-
-

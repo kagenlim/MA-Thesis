@@ -1,0 +1,172 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+\usepackage{amsmath, amsfonts}
+\usepackage{lscape}
+
+\author{John Doe}
+\title{Descriptive Tables}
+
+% these are compressed lists to help fit into a 1 page limit
+\newenvironment{enumerate*}%
+  {\vspace{-2ex} \begin{enumerate} %
+     \setlength{\itemsep}{-1ex} \setlength{\parsep}{0pt}}%
+  {\end{enumerate}}
+ 
+\newenvironment{itemize*}%
+  {\vspace{-2ex} \begin{itemize} %
+     \setlength{\itemsep}{-1ex} \setlength{\parsep}{0pt}}%
+  {\end{itemize}}
+ 
+\newenvironment{description*}%
+  {\vspace{-2ex} \begin{description} %
+     \setlength{\itemsep}{-1ex} \setlength{\parsep}{0pt}}%
+  {\end{description}}
+
+\begin{document}
+\begin{landscape}
+
+\begin{table}[!htbp] \centering 
+  \caption{Descriptive Statistics of Socio-Economic and School Safety Variables} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Variable & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{SD} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Max}\\ 
+\hline \\[-1.8ex] 
+percentlowgrades & 2762 & 18.26 & 17.58 & 0 & 100 \\ 
+percentnogocollege& 2762 & 37.31 & 24.23 & 0 & 100 \\ 
+percentacadnotimpt & 2762 & 28.96 & 22.21 & 0 & 100 \\ 
+\hline \\[-1.8ex] 
+totalincident & 2762 & 28.19 & 39.70 & 0 & 376 \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+
+\begin{table}[!htbp] \centering 
+  \caption{Descriptive Statistics of Neighborhood Crime Control Variables} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Variable & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Count of 'Mixed'} & \multicolumn{1}{c}{Count of 'Low'} & \multicolumn{1}{c}{Count of 'Moderate'} & \multicolumn{1}{c}{Count of 'High'}  \\ 
+\hline \\[-1.8ex] 
+crimelive & 2,762 & 384 & 1547 & 615 & 216 \\ 
+crimearea & 2,762 & N.A. & 2035 & 569 & 158 \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+
+\begin{table}[!htbp] \centering 
+  \caption{Descriptive Statistics of Parental and Community Involvement Variables - Ordinal}
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Variable & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Count of 0-25\%} & \multicolumn{1}{c}{Count of 26-50\%} & \multicolumn{1}{c}{Count of 51-75\%} & \multicolumn{1}{c}{Count of 76-100\%}  & \multicolumn{1}{c}{Count of 'does not offer'}\\ 
+\hline \\[-1.8ex] 
+openhouse & 2,762 & 210 & 628 & 928 & 976 & 20 \\ 
+parentteacherconf & 2,762 & 372 & 653 & 710 & 854 & 173 \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+
+\begin{table}[!htbp] \centering 
+  \caption{Descriptive Statistics of Security/Environmental Variables and Urbanicity Control Variable} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Variable & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Count of No} & \multicolumn{1}{c}{Count of Yes} \\ 
+\hline \\[-1.8ex] 
+visitorbadge & 2,762 & 100 & 2662 \\ 
+controlbuilding & 2,762 & 164 & 2598 \\ 
+controlground & 2,762 & 1416 & 1346 \\ 
+requirecheck & 2,762 & 2672 & 90  \\ 
+randomcheck & 2,762 & 2551 & 211 \\ 
+lockinside & 2,762 & 1001 & 1761 \\ 
+closelunch & 2,762 & 759 & 2003 \\ 
+randomsweep & 2,762 & 1501 & 1261 \\ 
+drugtesting & 2,762 & 2386 & 376 \\ 
+wearuniform & 2,762 & 2321 & 441 \\ 
+dresscode & 2,762 & 1259 & 1503 \\ 
+schoollockers & 2,762 & 969 & 1793 \\ 
+bookbags & 2,762 & 2523 & 139 \\ 
+panicbutton & 2,762 & 1876 & 886 \\ 
+emergencynotif & 2,762 & 783 & 1979 \\ 
+anonymousreport & 2,762 & 1189 & 1573 \\ 
+studentid & 2,762 & 2387 & 375 \\ 
+staffid & 2,762 & 808 & 1954 \\ 
+securitycamera & 2,762 & 298 & 2464 \\ 
+radio & 2,762 & 577 & 2185 \\ 
+prohibitphone & 2,762 & 1026 & 1736 \\ 
+urban & 2,762 & 623 & 2139\\
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+
+\begin{table}[!htbp] \centering 
+  \caption{Descriptive Statistics of Parental and Community Involvement Variables} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Variable & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Count of No} & \multicolumn{1}{c}{Count of Yes} \\ 
+\hline \\[-1.8ex] 
+disciplinaryprocess & 2,762 & 1391 & 1371 \\ 
+parenttrainingassist & 2,762 & 1464 & 1298 \\ 
+parenthelpdrug & 2,762 &  922 & 1840 \\ 
+socialshelpdrug & 2,762 & 894 &  1868 \\ 
+juvhelpdrug & 2,762 & 1585 & 1177 \\ 
+lawhelpdrug & 2,762 &  431&  2331\\ 
+mhhelpdrug & 2,762 &  864 & 1898 \\ 
+civichelpdrug & 2,762 &  1443 & 1319  \\ 
+privatehelpdrug & 2,762 & 1874 &  888 \\ 
+relighelpdrug & 2,762 & 1910 & 852 \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+
+\begin{table}[!htbp] \centering 
+  \caption{Descriptive Statistics of Educational Approaches Variables} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Variable & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Count of No} & \multicolumn{1}{c}{Count of Yes} \\ 
+\hline \\[-1.8ex] 
+preventioncurriculum & 2,762 & 193 & 2569 \\ 
+sel & 2,762 & 393 & 2369 \\ 
+behavmod & 2,762 &  162 & 2600 \\ 
+mentoring & 2,762 & 225 &  2537 \\ 
+peermediation & 2,762 & 1421 & 1341 \\ 
+studentcourt & 2,762 &  2443&  319\\ 
+restorativecircles & 2,762 &  1685 & 1077 \\ 
+promotecommunity & 2,762 &  448 & 2314  \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+
+\begin{table}[!htbp] \centering 
+  \caption{Descriptive Statistics of SHAP Values for Top 10 Variables with Highest Mean Absolute SHAP Values} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Variable & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{SD}  & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Median} & \multicolumn{1}{c}{Max} & \multicolumn{1}{c}{Mean Absolute}  \\ 
+\hline \\[-1.8ex]  
+schoolsize & 2,762 & -0.0335 & 0.389 & -0.947 &  -0.122 &  0.755 & 0.334 \\ 
+schooltype & 2,762 & -0.0473 & 0.278 & -0.895 &  0.0802 &  0.256 & 0.206 \\ 
+crimesschoolarea & 2,762 & 0.0127 & 0.236 & -0.653 &  0.0185 &  0.904 & 0.189 \\ 
+openhouse & 2,762 & 0.00517 & 0.113 & -0.360 &  0.0286 &  0.309 & 0.0945 \\ 
+percentacadnotimpt & 2,762 & 0.0152 & 0.117 & -0.634 &  0.0464 &  0.360 & 0.0933  \\ 
+crimesstudentsresidence & 2,762 & 0.0119 & 0.107 & -0.201 &  -0.0366 &  0.408 & 0.0928 \\ 
+parentteacherconf & 2,762 & 0.00420 & 0.102 & -0.265 &  0.00910 &  0.327 & 0.0868 \\ 
+percentlowgrades & 2,762 & 0.00154 & 0.106 & -0.512 &  0.00422 &  0.345 & 0.0776 \\ 
+juvhelpdrug & 2,762 & -0.0147 & 0.0848 & -0.237 &  -0.0276 &  0.210 & 0.0759  \\ 
+randomsweep & 2,762 & -0.00801 & 0.0659 & --0.203 &  -0.00392 &  0.193 & 0.0554  \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+l
+\end{landscape}
+\end{document}
