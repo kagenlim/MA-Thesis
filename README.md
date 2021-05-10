@@ -1,6 +1,6 @@
 # MA-Thesis
 
-My M.A. Thesis is titled 'Quantifying Variation in American School Safety with Explainable Machine Learning: An Application of Machine Learning Feature Importances for the Social Sciences'. On this repository, I share the code that I have used to generate the results in my thesis. This includes Python and R code, as well as some LaTeX code that was used to generate regression and summary statistics. The results from the Python and R scripts have been knit into HTML files, for your ease of viewing. Please do reach out if there is any way that I can help!
+My M.A. Thesis is titled 'Quantifying Variation in American School Safety with Explainable Machine Learning: An Application of Machine Learning Feature Importances for the Social Sciences'. On this repository, I share the code that I have used to generate the results in my thesis. This includes Python and R code, as well as some LaTeX code that was used to generate regression and summary statistics tables. The results from the Python and R scripts have been knit into HTML files, for your ease of viewing. Please do reach out if there is any way that I can help!
 
 
 > Abstract: 
